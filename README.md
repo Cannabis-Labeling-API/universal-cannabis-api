@@ -1,0 +1,1 @@
+# Domain Models for Universal QR Codes
