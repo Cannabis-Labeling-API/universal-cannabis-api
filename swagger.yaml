@@ -95,9 +95,12 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
-          name: regulatorId
-
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ItemInput"
       responses:
         "200":
           description: updated item
@@ -146,6 +149,8 @@ components:
         name:
           type: string
           example: Kush OG
+        strain:
+          type: string
       type: object
     ItemInput:
       required:
@@ -157,4 +162,7 @@ components:
         name:
           type: string
           example: Kush OG
+        strain:
+          type: string
+
       type: object
