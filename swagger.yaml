@@ -18,37 +18,20 @@ tags:
   - name: item
     description: Information and updating of individual items
 paths:
-  /collection/:
+  /collection/:id:
     get:
       tags:
         - collection
-      summary: searches inventory
-      operationId: searchInventory
-      description: |
-        By passing in the appropriate options, you can search for
-        available inventory in the system
+      summary: get info about a collection
+      operationId: getCollectionById
+      description: returns details for a collection
       parameters:
-        - in: query
-          name: searchString
-          description: pass an optional search string for looking up inventory
-          required: false
+        - in: path
+          name: id
+          description: id of record to look up
+          required: true
           schema:
             type: string
-        - in: query
-          name: skip
-          description: number of records to skip for pagination
-          schema:
-            type: integer
-            format: int32
-            minimum: 0
-        - in: query
-          name: limit
-          description: maximum number of records to return
-          schema:
-            type: integer
-            format: int32
-            minimum: 0
-            maximum: 50
       responses:
         "200":
           description: search results matching criteria
