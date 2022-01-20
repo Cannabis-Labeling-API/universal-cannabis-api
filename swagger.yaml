@@ -18,7 +18,7 @@ tags:
   - name: item
     description: Information and updating of individual items
 paths:
-  /collection/:id:
+  /collection/{id}:
     get:
       tags:
         - collection
@@ -40,63 +40,59 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/InventoryItem"
+                  $ref: "#/components/schemas/Collection"
         "400":
           description: bad input parameter
     post:
       tags:
-        - admins
-      summary: adds an inventory item
-      operationId: addInventory
-      description: Adds an item to the system
+        - collection
+      summary: adds a new collection
+      operationId: addCollection
+      description: Adds a new collection
       responses:
         "201":
-          description: item created
+          description: collection created
         "400":
           description: "invalid input, object invalid"
         "409":
-          description: an existing item already exists
+          description: an existing collection already exists
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/InventoryItem"
+              $ref: "#/components/schemas/Collection"
         description: Inventory item to add
 components:
   schemas:
-    InventoryItem:
+    Collection:
       type: object
       required:
         - id
-        - name
-        - manufacturer
-        - releaseDate
+        - items
       properties:
         id:
           type: string
           format: uuid
           example: d290f1ee-6c54-4b01-90e6-d701748f0851
-        name:
-          type: string
-          example: Widget Adapter
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/Item"
+
         releaseDate:
           type: string
           format: date-time
           example: "2016-08-29T09:12:33.001Z"
-        manufacturer:
-          $ref: "#/components/schemas/Manufacturer"
-    Manufacturer:
+    Item:
       required:
+        - id
         - name
       properties:
+        id:
+          type: string
+          format: uuid
+          example: 7fa7ea76-0d7e-4e6c-8bb0-abb89e38d6c9
         name:
           type: string
-          example: ACME Corporation
-        homePage:
-          type: string
-          format: url
-          example: "https://www.acme-corp.com"
-        phone:
-          type: string
-          example: 408-867-5309
+          example: Kush OG
       type: object
