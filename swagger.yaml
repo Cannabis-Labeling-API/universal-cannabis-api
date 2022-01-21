@@ -1,22 +1,17 @@
 openapi: 3.0.0
-servers:
-  # Added by API Auto Mocking Plugin
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/project-narwhal/project-narwhal/1.0.0
 info:
-  description: This is a simple API
+  description: Sample API for Universal QR Codes
   version: "1.0.0"
   title: Universal QR Code API
   contact:
-    email: you@your-company.com
-  license:
-    name: Apache 2.0
-    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+    email: engineering@nabis.com
 tags:
   - name: collection
     description: Information and updating of collections
   - name: item
-    description: Information and updating of individual items
+    description: Information and updating items
+  - name: product
+    description: Information about product details
 paths:
   /collection/{id}:
     get:
@@ -62,6 +57,7 @@ paths:
         "409":
           description: an existing collection already exists
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -100,7 +96,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ItemInput"
+              $ref: "#/components/schemas/Item"
       responses:
         "200":
           description: updated item
@@ -110,52 +106,96 @@ paths:
                 $ref: "#/components/schemas/Item"
 components:
   schemas:
-    Collection:
+    UuidArray:
+      type: array
+      items:
+        type: string
+        format: uuid
+    CollectionNoItemsArray:
       type: object
       required:
-        - id
+        - identifier
         - items
-      properties:
-        id:
-          type: string
-          format: uuid
-        items:
-          type: array
-          items:
-            $ref: "#/components/schemas/Item"
-        createdDate:
-          type: string
-          format: date-time
-    CollectionInput:
-      type: object
-      required:
-        - items
-      properties:
-        items:
-          type: array
-          items:
-            properties:
-              id:
-                type: string
-                format: uuid
-    Item:
-      required:
-        - id
         - name
       properties:
         id:
           type: string
           format: uuid
+        identifier:
+          type: string
+          description: Metrc Id / Batch Id / Case Id
         name:
           type: string
-          example: Kush OG
-        strain:
+          description: Name for your collection
+        createdDate:
           type: string
+          format: date-time
+        collectionType:
+          type: string
+          enum: ["collection", "manifest", "order", "package", "regulator"]
+    CollectionInput:
       type: object
+      allOf:
+        - $ref: "#/components/schemas/CollectionNoItemsArray"
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/UuidArray"
+    Collection:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdDate:
+          type: string
+          format: date-time
+      allOf:
+        - $ref: "#/components/schemas/CollectionInput"
+
     ItemInput:
       required:
         - name
       properties:
+        productId:
+          type: string
+          format: uuid
+        batchCollection:
+          type: array
+          description: Collection of items that make up the batch that this item is a part of
+          items:
+            $ref: "#/components/schemas/CollectionNoItemsArray"
+        regulatorCollection:
+          type: array
+          description: Collection of items that make up the metrc tags / regulator IDs that this item is a part of
+          items:
+            $ref: "#/components/schemas/CollectionNoItemsArray"
+        caseCollection:
+          type: array
+          description: Collection of cases that this item is a part of
+          items:
+            $ref: "#/components/schemas/CollectionNoItemsArray"
+      type: object
+    Item:
+      required:
+        - name
+        - id
+      allOf:
+        - $ref: "#/components/schemas/ItemInput"
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdDate:
+          type: string
+          format: date-time
+      type: object
+    Product:
+      required:
+        - id
+        - name
+      properties:
         id:
           type: string
           format: uuid
@@ -164,5 +204,4 @@ components:
           example: Kush OG
         strain:
           type: string
-
       type: object
