@@ -8,10 +8,10 @@ info:
 tags:
   - name: collection
     description: Information and updating of collections
-  - name: item
-    description: Information and updating items
-  - name: product
-    description: Information about product details
+  - name: skubatch
+    description: Information and updating skubatches
+  - name: sku
+    description: Information about sku details
 paths:
   /collection/{id}:
     get:
@@ -34,7 +34,7 @@ paths:
             application/json:
               schema:
                 type: array
-                items:
+                item:
                   $ref: "#/components/schemas/Collection"
         "400":
           description: bad input parameter
@@ -55,7 +55,7 @@ paths:
         "400":
           description: "invalid input, object invalid"
         "409":
-          description: an existing collection already exists
+          description: "an existing collection already exists"
       requestBody:
         required: true
         content:
@@ -63,10 +63,34 @@ paths:
             schema:
               $ref: "#/components/schemas/CollectionInput"
         description: Collection to create
-  /item/{id}:
+  /collection/search:
     get:
       tags:
-        - item
+        - collection
+      parameters:
+        - in: query
+          name: identifier
+          schema:
+            type: string
+          description: Search by the identifier of a collection
+        - in: query
+          name: collectionType
+          schema:
+            $ref: "#/components/schemas/CollectionType"
+      responses:
+        "200":
+          description: "Collections that match the search"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Collection"
+
+  /skubatch/{id}:
+    get:
+      tags:
+        - skubatch
       parameters:
         - in: path
           name: id
@@ -76,14 +100,14 @@ paths:
             type: string
       responses:
         "200":
-          description: item matching input id
+          description: skubatch matching input id
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Item"
+                $ref: "#/components/schemas/SkuBatch"
     put:
       tags:
-        - item
+        - skubatch
       parameters:
         - in: path
           name: id
@@ -96,26 +120,30 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Item"
+              $ref: "#/components/schemas/SkuBatch"
       responses:
         "200":
-          description: updated item
+          description: updated skubatch
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Item"
+                $ref: "#/components/schemas/SkuBatch"
 components:
   schemas:
+    CollectionType:
+      type: string
+      enum: ["batch", "case", "regulator"]
+      description: The type of collection, can be batch, case or regulator
     UuidArray:
       type: array
       items:
         type: string
         format: uuid
-    CollectionNoItemsArray:
+    CollectionNoSkuBatchesArray:
       type: object
       required:
         - identifier
-        - items
+        - skubatches
         - name
       properties:
         id:
@@ -131,14 +159,13 @@ components:
           type: string
           format: date-time
         collectionType:
-          type: string
-          enum: ["collection", "manifest", "order", "package", "regulator"]
+          $ref: "#/components/schemas/CollectionType"
     CollectionInput:
       type: object
       allOf:
-        - $ref: "#/components/schemas/CollectionNoItemsArray"
+        - $ref: "#/components/schemas/CollectionNoSkuBatchesArray"
       properties:
-        items:
+        skubatches:
           type: array
           items:
             $ref: "#/components/schemas/UuidArray"
@@ -154,35 +181,44 @@ components:
       allOf:
         - $ref: "#/components/schemas/CollectionInput"
 
-    ItemInput:
+    SkuBatchInput:
       required:
         - name
       properties:
-        productId:
+        skuId:
           type: string
           format: uuid
+        thcPercent:
+          type: number
+          format: float
+        cbdPercent:
+          type: number
+          format: float
+        otherPercent:
+          type: number
+          format: float
         batchCollection:
           type: array
-          description: Collection of items that make up the batch that this item is a part of
+          description: Collection of skubatches that make up the batch that this skubatch is a part of
           items:
-            $ref: "#/components/schemas/CollectionNoItemsArray"
+            $ref: "#/components/schemas/CollectionNoSkuBatchesArray"
         regulatorCollection:
           type: array
-          description: Collection of items that make up the metrc tags / regulator IDs that this item is a part of
+          description: Collection of skubatches that make up the metrc tags / regulator IDs that this skubatch is a part of
           items:
-            $ref: "#/components/schemas/CollectionNoItemsArray"
+            $ref: "#/components/schemas/CollectionNoSkuBatchesArray"
         caseCollection:
           type: array
-          description: Collection of cases that this item is a part of
+          description: Collection of cases that this skubatch is a part of
           items:
-            $ref: "#/components/schemas/CollectionNoItemsArray"
+            $ref: "#/components/schemas/CollectionNoSkuBatchesArray"
       type: object
-    Item:
+    SkuBatch:
       required:
         - name
         - id
       allOf:
-        - $ref: "#/components/schemas/ItemInput"
+        - $ref: "#/components/schemas/SkuBatchInput"
       properties:
         id:
           type: string
@@ -191,7 +227,7 @@ components:
           type: string
           format: date-time
       type: object
-    Product:
+    Sku:
       required:
         - id
         - name
