@@ -29,22 +29,47 @@ paths:
             type: string
       responses:
         "200":
-          description: search results matching criteria
+          description: successful lookup
           content:
             application/json:
               schema:
-                type: array
-                item:
-                  $ref: "#/components/schemas/Collection"
+                $ref: "#/components/schemas/Collection"
         "400":
           description: bad input parameter
+        "404":
+          description: could not find a collection with that id
+    put:
+      tags:
+        - collection
+      summary: update a collection's values
+      operationId: updateCollection
+      parameters:
+        - in: path
+          name: id
+          description: id of record to update
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CollectionInput"
+      responses:
+        "200":
+          description: collection updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Collection"
+
   /collection/:
     post:
       tags:
         - collection
       summary: adds a new collection
       operationId: addCollection
-      description: Adds a new collection
       responses:
         "201":
           description: collection created
@@ -63,6 +88,7 @@ paths:
             schema:
               $ref: "#/components/schemas/CollectionInput"
         description: Collection to create
+
   /collection/search:
     get:
       tags:
@@ -116,6 +142,7 @@ paths:
           schema:
             type: string
       requestBody:
+        description: All parameters in requestBody are optional
         required: true
         content:
           application/json:
@@ -128,6 +155,24 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SkuBatch"
+  /sku/{id}:
+    get:
+      tags:
+        - sku
+      parameters:
+        - in: path
+          name: id
+          description: id of record to look up
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: sku matching input identifier
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Sku"
 components:
   schemas:
     CollectionType:
@@ -139,37 +184,29 @@ components:
       items:
         type: string
         format: uuid
-    CollectionNoSkuBatchesArray:
+    BaseCollectionFields:
       type: object
       required:
         - identifier
-        - skubatches
         - name
+        - collectionType
       properties:
-        id:
-          type: string
-          format: uuid
         identifier:
           type: string
           description: Metrc Id / Batch Id / Case Id
         name:
           type: string
           description: Name for your collection
-        createdDate:
-          type: string
-          format: date-time
         collectionType:
           $ref: "#/components/schemas/CollectionType"
-    CollectionInput:
+    CollectionSkuBatchesArray:
       type: object
-      allOf:
-        - $ref: "#/components/schemas/CollectionNoSkuBatchesArray"
       properties:
         skubatches:
           type: array
           items:
             $ref: "#/components/schemas/UuidArray"
-    Collection:
+    CollectionIdCreatedAt:
       type: object
       properties:
         id:
@@ -178,8 +215,28 @@ components:
         createdDate:
           type: string
           format: date-time
+    CollectionNoSkuBatchesArray:
+      type: object
+      required:
+        - identifier
+        - skubatches
+        - name
       allOf:
-        - $ref: "#/components/schemas/CollectionInput"
+        - $ref: "#/components/schemas/BaseCollectionFields"
+        - $ref: "#/components/schemas/CollectionIdCreatedAt"
+
+    CollectionInput:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/BaseCollectionFields"
+        - $ref: "#/components/schemas/CollectionSkuBatchesArray"
+
+    Collection:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/BaseCollectionFields"
+        - $ref: "#/components/schemas/CollectionSkuBatchesArray"
+        - $ref: "#/components/schemas/CollectionIdCreatedAt"
 
     SkuBatchInput:
       required:
