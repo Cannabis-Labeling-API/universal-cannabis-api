@@ -1,2 +1,4 @@
 .idea
 index.html
+node_modules/
+build/

@@ -1,4 +1,6 @@
-# Domain Models for Universal QR Codes
+# Introduction
+
+Define Standardized API For Labeling Provider Integrations
 
 ## Version History
 
