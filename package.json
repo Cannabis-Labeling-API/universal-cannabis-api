@@ -1,0 +1,22 @@
+{
+  "name": "universal-qr-codes",
+  "version": "1.0.0",
+  "description": "Universal API For Labeling",
+  "main": "index.js",
+  "scripts": {
+    "build": "redoc-cli bundle -o build/index.html swagger.yaml"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elibosley/universal-labeling-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elibosley/universal-labeling-api/issues"
+  },
+  "homepage": "https://github.com/elibosley/universal-labeling-api#readme",
+  "dependencies": {
+    "redoc-cli": "^0.13.2"
+  }
+}
