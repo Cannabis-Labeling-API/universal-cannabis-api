@@ -322,7 +322,7 @@ components:
           nullable: true
           enum: [ "Each" ]
           description: Uses same name as Metrc UnitCbdContentDoseUnitOfMeasureName
-        unitTchPercent:
+        unitThcPercent:
           oneOf:
             - type: string
               format: float
