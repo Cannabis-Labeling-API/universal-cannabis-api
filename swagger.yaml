@@ -297,8 +297,8 @@ components:
         unitCbdPercent:
           oneOf:
             - type: string
-              format: integer
-            - type: integer
+              format: float
+            - type: float
           nullable: true
           description: Uses same name as Metrc UnitCbdPercentage
         unitCbdContent:
@@ -325,8 +325,8 @@ components:
         unitTchPercent:
           oneOf:
             - type: string
-              format: integer
-            - type: integer
+              format: float
+            - type: float
           nullable: true
           description: Uses same name as Metrc UnitThcPercent
         unitThcContent:
