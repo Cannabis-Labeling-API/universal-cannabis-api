@@ -4,7 +4,8 @@ info:
   version: "1.0.1"
   title: Universal QR Code API
   contact:
-    email: eli@nabis.com, matt.carter@nabis.com
+    email: eli@nabis.com
+    url: matt.carter@nabis.com
 tags:
   - name: collection
     description: Information and updating of collections
@@ -155,6 +156,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SkuBatch"
+
   /sku/{id}:
     get:
       tags:
@@ -173,17 +175,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Sku"
+
 components:
   schemas:
     CollectionType:
       type: string
       enum: ["batch", "case", "regulator"]
       description: The type of collection, can be batch, case or regulator
+
     UuidArray:
       type: array
       items:
         type: string
         format: uuid
+
     BaseCollectionFields:
       type: object
       required:
@@ -199,6 +204,7 @@ components:
           description: Name for your collection
         collectionType:
           $ref: "#/components/schemas/CollectionType"
+
     CollectionSkuBatchesArray:
       type: object
       properties:
@@ -206,6 +212,7 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/UuidArray"
+
     CollectionIdCreatedAt:
       type: object
       properties:
@@ -215,6 +222,7 @@ components:
         createdDate:
           type: string
           format: date-time
+
     CollectionNoSkuBatchesArray:
       type: object
       required:
@@ -238,7 +246,7 @@ components:
         - $ref: "#/components/schemas/CollectionSkuBatchesArray"
         - $ref: "#/components/schemas/CollectionIdCreatedAt"
 
-    SkuBatchInput:
+    SkuBatch:
       required:
         - skuId
         - defaultLabTestingState
