@@ -13,6 +13,8 @@ tags:
     description: Information and updating skubatches
   - name: sku
     description: Information about sku details
+  - name: each
+    description: Information about a serialized package
 paths:
   /collection/{id}:
     get:
@@ -156,7 +158,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SkuBatch"
-
+  
   /sku/{id}:
     get:
       tags:
@@ -175,20 +177,37 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Sku"
-
-components:
+  /each/{id}:
+    get:
+      tags:
+        - each
+      parameters:
+        - in: path
+          name: id
+          description: id of Each to look up
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Each matching input id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Each"
+components:  
   schemas:
     CollectionType:
       type: string
       enum: ["batch", "case", "regulator"]
       description: The type of collection, can be batch, case or regulator
-
-    UuidArray:
+    Id:
+      type: string
+      format: uuid
+    IdArray:
       type: array
       items:
-        type: string
-        format: uuid
-
+        $ref: "#/components/schemas/Id"
     BaseCollectionFields:
       type: object
       required:
@@ -211,14 +230,12 @@ components:
         skubatches:
           type: array
           items:
-            $ref: "#/components/schemas/UuidArray"
-
+            $ref: "#/components/schemas/IdArray"
     CollectionIdCreatedAt:
       type: object
       properties:
         id:
-          type: string
-          format: uuid
+          $ref: "#/components/schemas/Id"
         createdDate:
           type: string
           format: date-time
@@ -254,8 +271,7 @@ components:
         - approvalStatusDateTime
       properties:
         skuId:
-          type: string
-          format: uuid
+          $ref: "#/components/schemas/Id"
         defaultLabTestingState:
           type: string
           enum: [ "NotSubmitted" ]
@@ -292,7 +308,7 @@ components:
           nullable: true
           enum: [ "Each" ]
           description: Uses same name as Metrc UnitCbdContentDoseUnitOfMeasureName
-        unitTchPercent:
+        unitThcPercent:
           type: number
           format: float
           nullable: true
@@ -332,8 +348,7 @@ components:
         - isUsed
       properties:
         id:
-          type: string
-          format: uuid
+          $ref: "#/components/schemas/Id"
         name:
           type: string
           example: Kush OG
@@ -426,4 +441,24 @@ components:
         isUsed:
           type: boolean
           description: Uses same name as Metrc IsUsed
+      type: object
+
+    Each:
+      required:
+        - id
+      properties:
+        id:
+          $ref: "#/components/schemas/Id"
+        collections:
+          type: array
+          items:
+            $ref: "#/components/schemas/Collection"
+        skuBatchId:
+          $ref: "#/components/schemas/Id"
+        caseId:
+          $ref: "#/components/schemas/Id"
+        childId:
+          $ref: "#/components/schemas/Id"
+        sourceId:
+          $ref: "#/components/schemas/Id"
       type: object
