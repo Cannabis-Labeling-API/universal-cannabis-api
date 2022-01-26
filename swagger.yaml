@@ -4,7 +4,8 @@ info:
   version: "1.0.1"
   title: Universal QR Code API
   contact:
-    email: eli@nabis.com, matt.carter@nabis.com
+    email: eli@nabis.com
+    url: matt.carter@nabis.com
 tags:
   - name: collection
     description: Information and updating of collections
@@ -155,6 +156,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SkuBatch"
+
   /sku/{id}:
     get:
       tags:
@@ -173,17 +175,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Sku"
+
 components:
   schemas:
     CollectionType:
       type: string
       enum: ["batch", "case", "regulator"]
       description: The type of collection, can be batch, case or regulator
+
     UuidArray:
       type: array
       items:
         type: string
         format: uuid
+
     BaseCollectionFields:
       type: object
       required:
@@ -199,6 +204,7 @@ components:
           description: Name for your collection
         collectionType:
           $ref: "#/components/schemas/CollectionType"
+
     CollectionSkuBatchesArray:
       type: object
       properties:
@@ -206,6 +212,7 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/UuidArray"
+
     CollectionIdCreatedAt:
       type: object
       properties:
@@ -215,6 +222,7 @@ components:
         createdDate:
           type: string
           format: date-time
+
     CollectionNoSkuBatchesArray:
       type: object
       required:
@@ -238,15 +246,103 @@ components:
         - $ref: "#/components/schemas/CollectionSkuBatchesArray"
         - $ref: "#/components/schemas/CollectionIdCreatedAt"
 
-    SkuBatchInput:
+    SkuBatch:
       required:
-        - name
+        - skuId
+        - defaultLabTestingState
+        - approvalStatus
+        - approvalStatusDateTime
       properties:
         skuId:
           type: string
           format: uuid
+        defaultLabTestingState:
+          type: string
+          enum: [ "NotSubmitted" ]
+          description: Uses same name as Metrc DefaultLabTestingState
+        approvalStatus:
+          type: string
+          enum: [ "Approved" ]
+          description: Uses same name as Metrc ApprovalStatus
+        approvalStatusDateTime:
+          type: string
+          format: date-time
+          description: Uses same name as Metrc ApprovalStatusDateTime
+        unitCbdPercent:
+          type: number
+          format: float
+          nullable: true
+          description: Uses same name as Metrc UnitCbdPercentage
+        unitCbdContent:
+          type: number
+          format: float
+          nullable: true
+          description: Uses same name as Metrc UnitCbdContent
+        unitCbdContentUnitOfMeasureName:
+          type: string
+          nullable: true
+          enum: [ "Each" ]
+          description: Uses same name as Metrc UnitCbdContentUnitOfMeasureName
+        unitCbdContentDose:
+          type: string
+          nullable: true
+          description: Uses same name as Metrc UnitCbdContentDose
+        unitCbdContentDoseUnitOfMeasureName:
+          type: string
+          nullable: true
+          enum: [ "Each" ]
+          description: Uses same name as Metrc UnitCbdContentDoseUnitOfMeasureName
+        unitTchPercent:
+          type: number
+          format: float
+          nullable: true
+          description: Uses same name as Metrc UnitThcPercent
+        unitThcContent:
+          type: number
+          format: float
+          nullable: true
+          description: Uses same name as Metrc UnitThcContent
+        unitThcContentUnitOfMeasureName:
+          type: string
+          nullable: true
+          enum: [ "Each" ]
+          description: Uses same name as Metrc UnitThcContentUnitOfMeasureName
+        unitThcContentDose:
+          type: string
+          nullable: true
+          description: Uses same name as Metrc UnitThcContentDose
+        unitThcContentDoseUnitOfMeasureName:
+          type: string
+          nullable: true
+          enum: [ "Each" ]
+          description: Uses same name as Metrc UnitThcContentDoseUnitOfMeasureName
+      type: object
+
+    Sku:
+      required:
+        - id
+        - name
+        - strainId
+        - strainName
+        - productCategoryName
+        - productCategoryType
+        - quantityType
+        - publicIngredients
+        - description
+        - isUsed
+      properties:
+        id:
+          type: string
+          format: uuid
         name:
           type: string
+          example: Kush OG
+        strainId:
+          type: number
+          description: Uses same name as Metrc StrainId
+        strainName:
+          type: string
+          description: Uses same name as Metrc StrainName
         productCategoryName:
           type: string
           enum: [
@@ -267,94 +363,26 @@ components:
           type: string
           enum: [ "WeightBased", "CountBased" ]
           description: Uses same name as Metrc QuantityType
-        defaultLabTestingState:
-          type: string
-          enum: [ "NotSubmitted" ]
-          description: Uses same name as Metrc DefaultLabTestingState
-        unitOfMeasureName:
-          type: string
-          enum: [ "Ounces", "Each" ]
-          description: Uses same name as Metrc UnitOfMeasureName
-        approvalStatus:
-          type: string
-          enum: [ "Approved" ]
-          description: Uses same name as Metrc ApprovalStatus
-        approvalStatusDateTime:
-          type: string
-          format: date-time
-          description: Uses same name as Metrc ApprovalStatusDateTime
-        strainId:
-          type: number
-          description: Uses same name as Metrc StrainId
-        strainName:
-          type: string
-          description: Uses same name as Metrc StrainName
         administrationMethod:
           type: string
           nullable: true
           enum: [ "" ]
           description: Uses same name as Metrc AdministrationMethod
-        unitCbdPercent:
-          oneOf:
-            - type: string
-              format: float
-            - type: float
-          nullable: true
-          description: Uses same name as Metrc UnitCbdPercentage
-        unitCbdContent:
-          oneOf:
-            - type: string
-              format: integer
-            - type: integer
-          nullable: true
-          description: Uses same name as Metrc UnitCbdContent
-        unitCbdContentUnitOfMeasureName:
+        publicIngredients:
           type: string
           nullable: true
-          enum: [ "Each" ]
-          description: Uses same name as Metrc UnitCbdContentUnitOfMeasureName
-        unitCbdContentDose:
+          description: Uses same name as Metrc PublicIngredients
+        description:
           type: string
           nullable: true
-          description: Uses same name as Metrc UnitCbdContentDose
-        unitCbdContentDoseUnitOfMeasureName:
+          description: Uses same name as Metrc Description
+        unitOfMeasureName:
           type: string
-          nullable: true
-          enum: [ "Each" ]
-          description: Uses same name as Metrc UnitCbdContentDoseUnitOfMeasureName
-        unitThcPercent:
-          oneOf:
-            - type: string
-              format: float
-            - type: float
-          nullable: true
-          description: Uses same name as Metrc UnitThcPercent
-        unitThcContent:
-          oneOf:
-            - type: string
-              format: integer
-            - type: integer
-          nullable: true
-          description: Uses same name as Metrc UnitThcContent
-        unitThcContentUnitOfMeasureName:
-          type: string
-          nullable: true
-          enum: [ "Each" ]
-          description: Uses same name as Metrc UnitThcContentUnitOfMeasureName
-        unitThcContentDose:
-          type: string
-          nullable: true
-          description: Uses same name as Metrc UnitThcContentDose
-        unitThcContentDoseUnitOfMeasureName:
-          type: string
-          nullable: true
-          enum: [ "Each" ]
-          description: Uses same name as Metrc UnitThcContentDoseUnitOfMeasureName
+          enum: [ "Ounces", "Each" ]
+          description: Uses same name as Metrc UnitOfMeasureName
         unitVolume:
-          oneOf:
-            - type: string
-              format: integer
-            - type: integer
+          type: number
+          format: float
           nullable: true
           description: Uses same name as Metrc UnitVolume
         unitVolumeUnitOfMeasureName:
@@ -363,10 +391,8 @@ components:
           enum: [ "Each" ]
           description: Uses same name as Metrc UnitVolumeUnitOfMeasureName
         unitWeight:
-          oneOf:
-            - type: string
-              format: integer
-            - type: integer
+          type: number
+          format: float
           nullable: true
           description: Uses same name as Metrc UnitWeight
         unitWeightUnitOfMeasureName:
@@ -379,17 +405,13 @@ components:
           nullable: true
           description: Uses same name as Metrc ServingSize
         supplyDurationDays:
-          oneOf:
-            - type: string
-              format: integer
-            - type: integer
+          type: number
+          format: integer
           nullable: true
           description: Uses same name as Metrc SupplyDurationDays
         nubmerOfDoses:
-          oneOf:
-            - type: string
-              format: integer
-            - type: integer
+          type: number
+          format: float
           nullable: true
           description: Uses same name as Metrc NumberOfDoses
         unitQuantity:
@@ -401,58 +423,7 @@ components:
           nullable: true
           enum: [ "Each" ]
           description: Uses same name as Metrc UnitQuantityUnitOfMeasureName
-        publicIngredients:
-          type: string
-          nullable: true
-          description: Uses same name as Metrc PublicIngredients
-        description:
-          type: string
-          nullable: true
-          description: Uses same name as Metrc Description
         isUsed:
           type: boolean
           description: Uses same name as Metrc IsUsed
-        batchCollection:
-          type: array
-          description: Collection of skubatches that make up the batch that this skubatch is a part of
-          items:
-            $ref: "#/components/schemas/CollectionNoSkuBatchesArray"
-        regulatorCollection:
-          type: array
-          description: Collection of skubatches that make up the metrc tags / regulator IDs that this skubatch is a part of
-          items:
-            $ref: "#/components/schemas/CollectionNoSkuBatchesArray"
-        caseCollection:
-          type: array
-          description: Collection of cases that this skubatch is a part of
-          items:
-            $ref: "#/components/schemas/CollectionNoSkuBatchesArray"
-      type: object
-    SkuBatch:
-      required:
-        - name
-        - id
-      allOf:
-        - $ref: "#/components/schemas/SkuBatchInput"
-      properties:
-        id:
-          type: string
-          format: uuid
-        createdDate:
-          type: string
-          format: date-time
-      type: object
-    Sku:
-      required:
-        - id
-        - name
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-          example: Kush OG
-        strain:
-          type: string
       type: object
