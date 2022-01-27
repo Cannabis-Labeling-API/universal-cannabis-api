@@ -9,10 +9,10 @@ info:
 tags:
   - name: collection
     description: Information and updating of collections
-  - name: skubatch
-    description: Information and updating skubatches
   - name: sku
     description: Information about sku details
+  - name: batch
+    description: Information about batch details like testing and THC content
   - name: each
     description: Information about a serialized package
 paths:
@@ -115,11 +115,10 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Collection"
-
-  /skubatch/{id}:
+  /batch/{id}:
     get:
       tags:
-        - skubatch
+        - batch
       parameters:
         - in: path
           name: id
@@ -129,36 +128,12 @@ paths:
             type: string
       responses:
         "200":
-          description: skubatch matching input id
+          description: Get information about the batch from either a Collection id or an Each id
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SkuBatch"
-    put:
-      tags:
-        - skubatch
-      parameters:
-        - in: path
-          name: id
-          description: id of record to update
-          required: true
-          schema:
-            type: string
-      requestBody:
-        description: All parameters in requestBody are optional
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/SkuBatch"
-      responses:
-        "200":
-          description: updated skubatch
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SkuBatch"
-  
+                $ref: "#/components/schemas/Batch"
+
   /sku/{id}:
     get:
       tags:
@@ -195,7 +170,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Each"
-components:  
+components:
   schemas:
     CollectionType:
       type: string
@@ -262,23 +237,20 @@ components:
         - $ref: "#/components/schemas/BaseCollectionFields"
         - $ref: "#/components/schemas/CollectionSkuBatchesArray"
         - $ref: "#/components/schemas/CollectionIdCreatedAt"
-
-    SkuBatch:
+    Batch:
       required:
         - skuId
         - defaultLabTestingState
         - approvalStatus
         - approvalStatusDateTime
       properties:
-        skuId:
-          $ref: "#/components/schemas/Id"
         defaultLabTestingState:
           type: string
-          enum: [ "NotSubmitted" ]
+          enum: ["NotSubmitted"]
           description: Uses same name as Metrc DefaultLabTestingState
         approvalStatus:
           type: string
-          enum: [ "Approved" ]
+          enum: ["Approved"]
           description: Uses same name as Metrc ApprovalStatus
         approvalStatusDateTime:
           type: string
@@ -297,7 +269,7 @@ components:
         unitCbdContentUnitOfMeasureName:
           type: string
           nullable: true
-          enum: [ "Each" ]
+          enum: ["Each"]
           description: Uses same name as Metrc UnitCbdContentUnitOfMeasureName
         unitCbdContentDose:
           type: string
@@ -306,7 +278,7 @@ components:
         unitCbdContentDoseUnitOfMeasureName:
           type: string
           nullable: true
-          enum: [ "Each" ]
+          enum: ["Each"]
           description: Uses same name as Metrc UnitCbdContentDoseUnitOfMeasureName
         unitThcPercent:
           type: number
@@ -321,7 +293,7 @@ components:
         unitThcContentUnitOfMeasureName:
           type: string
           nullable: true
-          enum: [ "Each" ]
+          enum: ["Each"]
           description: Uses same name as Metrc UnitThcContentUnitOfMeasureName
         unitThcContentDose:
           type: string
@@ -330,10 +302,9 @@ components:
         unitThcContentDoseUnitOfMeasureName:
           type: string
           nullable: true
-          enum: [ "Each" ]
+          enum: ["Each"]
           description: Uses same name as Metrc UnitThcContentDoseUnitOfMeasureName
       type: object
-
     Sku:
       required:
         - id
@@ -360,28 +331,29 @@ components:
           description: Uses same name as Metrc StrainName
         productCategoryName:
           type: string
-          enum: [
+          enum:
+            [
               "Pre-Roll Flower",
               "Flower (packaged eight - each",
               "Flower (packaged - each)",
               "Vape Cartridge (weight - each)",
               "Other Concentrate (weight - each)",
               "Edible (volume - each)",
-              "Tincture (volume - each)"
-          ]
+              "Tincture (volume - each)",
+            ]
           description: Uses same name as Metrc ProductCategoryName
         productCategoryType:
           type: string
-          enum: [ "Buds", "Concentrate", "InfusedEdible" ]
+          enum: ["Buds", "Concentrate", "InfusedEdible"]
           description: Uses same name as Metrc ProductCategoryType
         quantityType:
           type: string
-          enum: [ "WeightBased", "CountBased" ]
+          enum: ["WeightBased", "CountBased"]
           description: Uses same name as Metrc QuantityType
         administrationMethod:
           type: string
           nullable: true
-          enum: [ "" ]
+          enum: [""]
           description: Uses same name as Metrc AdministrationMethod
         publicIngredients:
           type: string
@@ -393,7 +365,7 @@ components:
           description: Uses same name as Metrc Description
         unitOfMeasureName:
           type: string
-          enum: [ "Ounces", "Each" ]
+          enum: ["Ounces", "Each"]
           description: Uses same name as Metrc UnitOfMeasureName
         unitVolume:
           type: number
@@ -403,7 +375,7 @@ components:
         unitVolumeUnitOfMeasureName:
           type: string
           nullable: true
-          enum: [ "Each" ]
+          enum: ["Each"]
           description: Uses same name as Metrc UnitVolumeUnitOfMeasureName
         unitWeight:
           type: number
@@ -413,7 +385,7 @@ components:
         unitWeightUnitOfMeasureName:
           type: string
           nullable: true
-          enum: [ "Each" ]
+          enum: ["Each"]
           description: Uses same name as Metrc UnitWeightUnitOfMeasureName
         servingSize:
           type: string
@@ -436,7 +408,7 @@ components:
         unitQuantityUnitOfMeasure:
           type: string
           nullable: true
-          enum: [ "Each" ]
+          enum: ["Each"]
           description: Uses same name as Metrc UnitQuantityUnitOfMeasureName
         isUsed:
           type: boolean
@@ -453,7 +425,7 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Collection"
-        skuBatchId:
+        batchId:
           $ref: "#/components/schemas/Id"
         caseId:
           $ref: "#/components/schemas/Id"
