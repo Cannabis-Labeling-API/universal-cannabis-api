@@ -433,4 +433,6 @@ components:
           $ref: "#/components/schemas/Id"
         sourceId:
           $ref: "#/components/schemas/Id"
+        skuId:
+          $ref: "#/components/schemas/Sku"
       type: object
