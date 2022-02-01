@@ -203,9 +203,7 @@ components:
       type: object
       properties:
         skubatches:
-          type: array
-          items:
-            $ref: "#/components/schemas/IdArray"
+          $ref: "#/components/schemas/IdArray"
     CollectionIdCreatedAt:
       type: object
       properties:
@@ -214,7 +212,6 @@ components:
         createdDate:
           type: string
           format: date-time
-
     CollectionNoSkuBatchesArray:
       type: object
       required:
