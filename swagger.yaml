@@ -10,11 +10,11 @@ tags:
   - name: collection
     description: Information and updating of collections
   - name: sku
-    description: Information about sku details
+    description: Information about sku details like product name, description, doses, etc 
   - name: batch
     description: Information about batch details like testing and THC content
   - name: each
-    description: Information about a serialized package
+    description: Information about a serialized package - single unit of a sku
 paths:
   /collection/{id}:
     get:
@@ -199,10 +199,10 @@ components:
         collectionType:
           $ref: "#/components/schemas/CollectionType"
 
-    CollectionSkuBatchesArray:
+    CollectionEachesArray:
       type: object
       properties:
-        skubatches:
+        eaches:
           $ref: "#/components/schemas/IdArray"
     CollectionIdCreatedAt:
       type: object
@@ -212,27 +212,18 @@ components:
         createdDate:
           type: string
           format: date-time
-    CollectionNoSkuBatchesArray:
-      type: object
-      required:
-        - identifier
-        - skubatches
-        - name
-      allOf:
-        - $ref: "#/components/schemas/BaseCollectionFields"
-        - $ref: "#/components/schemas/CollectionIdCreatedAt"
 
     CollectionInput:
       type: object
       allOf:
         - $ref: "#/components/schemas/BaseCollectionFields"
-        - $ref: "#/components/schemas/CollectionSkuBatchesArray"
+        - $ref: "#/components/schemas/CollectionEachesArray"
 
     Collection:
       type: object
       allOf:
         - $ref: "#/components/schemas/BaseCollectionFields"
-        - $ref: "#/components/schemas/CollectionSkuBatchesArray"
+        - $ref: "#/components/schemas/CollectionEachesArray"
         - $ref: "#/components/schemas/CollectionIdCreatedAt"
     Batch:
       required:
@@ -418,18 +409,14 @@ components:
       properties:
         id:
           $ref: "#/components/schemas/Id"
-        collections:
-          type: array
-          items:
-            $ref: "#/components/schemas/Collection"
         batchId:
           $ref: "#/components/schemas/Id"
         caseId:
           $ref: "#/components/schemas/Id"
-        childId:
+        latestRegulatorId:
           $ref: "#/components/schemas/Id"
-        sourceId:
-          $ref: "#/components/schemas/Id"
+        regulatorIds:
+          $ref: "#/components/schemas/IdArray"
         skuId:
           $ref: "#/components/schemas/Id"
       type: object
