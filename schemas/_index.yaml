@@ -1,0 +1,14 @@
+Batch:
+  $ref: Batch.yaml
+Case:
+  $ref: Case.yaml
+Each:
+  $ref: Each.yaml
+Id:
+  $ref: Id.yaml
+IdArray:
+  $ref: IdArray.yaml
+Regulator:
+  $ref: Regulator.yaml
+Product:
+  $ref: Product.yaml

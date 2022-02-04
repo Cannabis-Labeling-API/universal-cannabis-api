@@ -1,0 +1,67 @@
+type: object
+required:
+  - skuId
+  - defaultLabTestingState
+  - approvalStatus
+  - approvalStatusDateTime
+properties:
+  defaultLabTestingState:
+    type: string
+    enum: ["NotSubmitted"]
+    description: Uses same name as Metrc DefaultLabTestingState
+  approvalStatus:
+    type: string
+    enum: ["Approved"]
+    description: Uses same name as Metrc ApprovalStatus
+  approvalStatusDateTime:
+    type: string
+    format: date-time
+    description: Uses same name as Metrc ApprovalStatusDateTime
+  unitCbdPercent:
+    type: number
+    format: float
+    nullable: true
+    description: Uses same name as Metrc UnitCbdPercentage
+  unitCbdContent:
+    type: number
+    format: float
+    nullable: true
+    description: Uses same name as Metrc UnitCbdContent
+  unitCbdContentUnitOfMeasureName:
+    type: string
+    nullable: true
+    enum: ["Each"]
+    description: Uses same name as Metrc UnitCbdContentUnitOfMeasureName
+  unitCbdContentDose:
+    type: string
+    nullable: true
+    description: Uses same name as Metrc UnitCbdContentDose
+  unitCbdContentDoseUnitOfMeasureName:
+    type: string
+    nullable: true
+    enum: ["Each"]
+    description: Uses same name as Metrc UnitCbdContentDoseUnitOfMeasureName
+  unitThcPercent:
+    type: number
+    format: float
+    nullable: true
+    description: Uses same name as Metrc UnitThcPercent
+  unitThcContent:
+    type: number
+    format: float
+    nullable: true
+    description: Uses same name as Metrc UnitThcContent
+  unitThcContentUnitOfMeasureName:
+    type: string
+    nullable: true
+    enum: ["Each"]
+    description: Uses same name as Metrc UnitThcContentUnitOfMeasureName
+  unitThcContentDose:
+    type: string
+    nullable: true
+    description: Uses same name as Metrc UnitThcContentDose
+  unitThcContentDoseUnitOfMeasureName:
+    type: string
+    nullable: true
+    enum: ["Each"]
+    description: Uses same name as Metrc UnitThcContentDoseUnitOfMeasureName
