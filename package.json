@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/elibosley/universal-labeling-api#readme",
   "dependencies": {
-    "redoc-cli": "^0.13.2"
+    "redoc-cli": "^0.13.2",
+    "swagger-cli": "^4.0.4"
   }
 }

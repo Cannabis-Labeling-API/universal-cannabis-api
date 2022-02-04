@@ -15,6 +15,8 @@ tags:
     description: Information and updating a case an item is a part of
   - name: each
     description: Information and updating a serialized package - single unit of a skuId
+  - name: regulator
+    description: Query for details about regulator tags
 paths:
   /batch/{id}:
     get:
@@ -113,6 +115,39 @@ paths:
             application/json:
               schema:
                 $ref: ./schemas/Each.yaml
+  /regulator/{id}/:
+    get:
+      tags:
+        - regulator
+      parameters:
+        - $ref: "#/components/parameters/pathId"
+      responses:
+        200:
+          $ref: "#/components/responses/regulatorResponse"
+    put:
+      tags:
+        - regulator
+      parameters:
+        - $ref: "#/components/parameters/pathId"
+      requestBody:
+        $ref: "#/components/requestBodies/regulatorMultiputBody"
+      responses:
+        200:
+          description: Returns the regulator event that was attached to these items, fails if the items are not all from the same parent
+          content:
+            application/json:
+              schema:
+                $ref: ./schemas/Regulator.yaml
+        404:
+          description: Returned if not all ids were able to be attached, this indicates an error in the tagging Flower"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  failures:
+                    $ref: ./schemas/IdArray.yaml
+
 components:
   schemas:
     $ref: schemas/_index.yaml
@@ -132,3 +167,25 @@ components:
           schema:
             oneOf:
               - $ref: ./schemas/Regulator.yaml
+    regulatorMultiputBody:
+      description: Body for a request to put a regulator id on multiple items
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              ids:
+                $ref: ./schemas/IdArray.yaml
+
+  responses:
+    regulatorResponse:
+      description: Array of regulators associated with that regulator id
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              regulatorEvents:
+                type: array
+                items:
+                  $ref: ./schemas/Regulator.yaml
