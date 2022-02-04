@@ -1,0 +1,14 @@
+required:
+  - id
+
+  - kind
+properties:
+  id:
+    $ref: Id.yaml
+  parent:
+    nullable: true
+    $ref: Id.yaml
+  kind:
+    type: string
+    enum: ["batch", "transfer"]
+type: object

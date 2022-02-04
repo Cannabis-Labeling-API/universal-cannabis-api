@@ -1,0 +1,3 @@
+type: string
+enum: ["batch", "case", "regulator"]
+description: The type of collection, can be batch, case or regulator

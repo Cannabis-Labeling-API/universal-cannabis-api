@@ -1,0 +1,16 @@
+required:
+  - id
+properties:
+  id:
+    $ref: Id.yaml
+  batchId:
+    $ref: Id.yaml
+  caseId:
+    $ref: Id.yaml
+  latestRegulatorId:
+    $ref: Id.yaml
+  regulatorIds:
+    $ref: Id.yaml
+  skuId:
+    $ref: Id.yaml
+type: object

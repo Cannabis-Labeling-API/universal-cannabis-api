@@ -4,7 +4,7 @@
   "description": "Universal API For Labeling",
   "main": "index.js",
   "scripts": {
-    "build": "redoc-cli bundle -o build/index.html swagger.yaml"
+    "build": "swagger-cli bundle swagger.yaml -o prebuild/swagger.json && redoc-cli bundle -o build/index.html prebuild/swagger.json"
   },
   "repository": {
     "type": "git",

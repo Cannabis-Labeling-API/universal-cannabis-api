@@ -1,0 +1,108 @@
+required:
+  - id
+  - name
+  - strainId
+  - strainName
+  - productCategoryName
+  - productCategoryType
+  - quantityType
+  - publicIngredients
+  - description
+  - isUsed
+properties:
+  id:
+    $ref: Id.yaml
+  name:
+    type: string
+    example: Kush OG
+  strainId:
+    type: number
+    description: Uses same name as Metrc StrainId
+  strainName:
+    type: string
+    description: Uses same name as Metrc StrainName
+  productCategoryName:
+    type: string
+    enum:
+      [
+        "Pre-Roll Flower",
+        "Flower (packaged eight - each",
+        "Flower (packaged - each)",
+        "Vape Cartridge (weight - each)",
+        "Other Concentrate (weight - each)",
+        "Edible (volume - each)",
+        "Tincture (volume - each)",
+      ]
+    description: Uses same name as Metrc ProductCategoryName
+  productCategoryType:
+    type: string
+    enum: ["Buds", "Concentrate", "InfusedEdible"]
+    description: Uses same name as Metrc ProductCategoryType
+  quantityType:
+    type: string
+    enum: ["WeightBased", "CountBased"]
+    description: Uses same name as Metrc QuantityType
+  administrationMethod:
+    type: string
+    nullable: true
+    enum: [""]
+    description: Uses same name as Metrc AdministrationMethod
+  publicIngredients:
+    type: string
+    nullable: true
+    description: Uses same name as Metrc PublicIngredients
+  description:
+    type: string
+    nullable: true
+    description: Uses same name as Metrc Description
+  unitOfMeasureName:
+    type: string
+    enum: ["Ounces", "Each"]
+    description: Uses same name as Metrc UnitOfMeasureName
+  unitVolume:
+    type: number
+    format: float
+    nullable: true
+    description: Uses same name as Metrc UnitVolume
+  unitVolumeUnitOfMeasureName:
+    type: string
+    nullable: true
+    enum: ["Each"]
+    description: Uses same name as Metrc UnitVolumeUnitOfMeasureName
+  unitWeight:
+    type: number
+    format: float
+    nullable: true
+    description: Uses same name as Metrc UnitWeight
+  unitWeightUnitOfMeasureName:
+    type: string
+    nullable: true
+    enum: ["Each"]
+    description: Uses same name as Metrc UnitWeightUnitOfMeasureName
+  servingSize:
+    type: string
+    nullable: true
+    description: Uses same name as Metrc ServingSize
+  supplyDurationDays:
+    type: number
+    format: integer
+    nullable: true
+    description: Uses same name as Metrc SupplyDurationDays
+  nubmerOfDoses:
+    type: number
+    format: float
+    nullable: true
+    description: Uses same name as Metrc NumberOfDoses
+  unitQuantity:
+    type: integer
+    nullable: true
+    description: Uses same name as Metrc UnitQuantity
+  unitQuantityUnitOfMeasure:
+    type: string
+    nullable: true
+    enum: ["Each"]
+    description: Uses same name as Metrc UnitQuantityUnitOfMeasureName
+  isUsed:
+    type: boolean
+    description: Uses same name as Metrc IsUsed
+type: object

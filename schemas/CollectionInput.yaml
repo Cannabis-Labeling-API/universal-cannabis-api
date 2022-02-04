@@ -1,0 +1,17 @@
+CollectionInput:
+  type: object
+  required:
+    - identifier
+    - name
+    - collectionType
+  properties:
+    identifier:
+      type: string
+      description: Metrc Id / Batch Id / Case Id
+    name:
+      type: string
+      description: Name for your collection
+    collectionType:
+      $ref: "./CollectionType.yaml"
+    eaches:
+      $ref: "./IdArray.yaml"
