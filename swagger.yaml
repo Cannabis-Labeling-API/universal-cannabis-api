@@ -68,7 +68,6 @@ paths:
               schema:
                 $ref: ./schemas/Case.yaml
     put:
-      description: A user can put regulator tags onto cases using a PUT command
       tags:
         - case
       parameters:
@@ -101,7 +100,6 @@ paths:
               schema:
                 $ref: ./schemas/Each.yaml
     put:
-      description: A user can put regulator tags onto eaches using a PUT command
       tags:
         - each
       parameters:

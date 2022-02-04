@@ -2,12 +2,6 @@ Batch:
   $ref: Batch.yaml
 Case:
   $ref: Case.yaml
-Collection:
-  $ref: Collection.yaml
-CollectionInput:
-  $ref: CollectionInput.yaml
-CollectionType:
-  $ref: CollectionType.yaml
 Each:
   $ref: Each.yaml
 Id:

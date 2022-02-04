@@ -7,10 +7,10 @@ properties:
     $ref: Id.yaml
   caseId:
     $ref: Id.yaml
-  latestRegulatorId:
-    $ref: Id.yaml
-  regulatorIds:
-    $ref: Id.yaml
-  skuId:
+  regulatorEvents:
+    type: array
+    items:
+      $ref: Regulator.yaml
+  productId:
     $ref: Id.yaml
 type: object
