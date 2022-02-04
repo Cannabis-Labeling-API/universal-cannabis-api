@@ -123,7 +123,7 @@ paths:
         - $ref: "#/components/parameters/pathId"
       responses:
         200:
-          $ref: "#/components/responses/regulatorResponse"
+          $ref: "#/components/responses/eachesAndCasesResponse"
     put:
       tags:
         - regulator
@@ -178,13 +178,21 @@ components:
                 $ref: ./schemas/IdArray.yaml
 
   responses:
-    regulatorResponse:
-      description: Array of regulators associated with that regulator id
+    eachesAndCasesResponse:
+      description: Array of eaches, cases, and regualator events associated with a regulatorId
       content:
         application/json:
           schema:
             type: object
             properties:
+              eaches:
+                type: array
+                items:
+                  $ref: ./schemas/IdArray.yaml
+              cases:
+                type: array
+                items:
+                  $ref: ./schemas/IdArray.yaml
               regulatorEvents:
                 type: array
                 items:
