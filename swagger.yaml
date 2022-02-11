@@ -7,8 +7,8 @@ info:
     email: eli@nabis.com
     url: matt.carter@nabis.com
 tags:
-  - name: hostname
-    description: Get the hostname for the universal API from a QR code URL
+  - name: endpoint
+    description: Get the endpoint for the universal API from a QR code URL
   - name: product
     description: Information about product details like product name, description, doses, etc
   - name: batch
@@ -27,11 +27,17 @@ servers:
     description: Server for your universal API
 
 paths:
-  /uapi/hostname:
-    description: URL to get the hostname from a QR code label - potentially hosted on a different server
+  /uapi/endpoint:
     get:
+      description:
+        "URL to get the hostname from a QR code label - potentially hosted on a different server.
+        This endpoint should also provide the vendor for the label,
+        in order to assist in developers matching their API tokens to the correct endpoints.
+
+        For example, if you were to make a request to qr.nabis.com/uapi/endpoint, we would respond with an endpoint of qrApi.nabis.com/uapi/v1/
+        as well as a vendor tag of nabis, allowing a developer to easily match their stored API keys to our endpoint."
       tags:
-        - hostname
+        - endpoint
       servers:
         - url: https://shortqrurl.com/
       responses:
@@ -42,9 +48,13 @@ paths:
               schema:
                 type: object
                 properties:
-                  uapiHostname:
+                  endpoint:
                     type: string
-                    example: qr.example.com
+                    example: qr.example.com/uapi/v1/
+                  vendor:
+                    type: string
+                    enum: ["nabis", "lucid", "chroma"]
+                    example: nabis
   /batch/{id}:
     get:
       tags:
