@@ -7,6 +7,8 @@ info:
     email: eli@nabis.com
     url: matt.carter@nabis.com
 tags:
+  - name: hostname
+    description: Get the hostname for the universal API from a QR code URL
   - name: product
     description: Information about product details like product name, description, doses, etc
   - name: batch
@@ -17,7 +19,32 @@ tags:
     description: Information and updating a serialized package - single unit of a skuId
   - name: regulator
     description: Query for details about regulator tags
+security:
+  - ApiKeyAuth:
+      - write
+servers:
+  - url: https://qr.example.com/v1/uapi
+    description: Server for your universal API
+
 paths:
+  /uapi/hostname:
+    description: URL to get the hostname from a QR code label - hosted on a different server
+    get:
+      tags:
+        - hostname
+      servers:
+        - url: https://shortqrurl.com/
+      responses:
+        200:
+          description: The base url for the API
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uapiHostname:
+                    type: string
+                    example: qr.example.com
   /batch/{id}:
     get:
       tags:
@@ -149,6 +176,12 @@ paths:
                     $ref: ./schemas/IdArray.yaml
 
 components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: "header"
+      name: "api-token"
+      description: Any users may generate an api token from their account page on the respective labeling site
   schemas:
     $ref: schemas/_index.yaml
   parameters:
