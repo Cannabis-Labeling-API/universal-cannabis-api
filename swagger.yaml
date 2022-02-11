@@ -28,7 +28,7 @@ servers:
 
 paths:
   /uapi/hostname:
-    description: URL to get the hostname from a QR code label - hosted on a different server
+    description: URL to get the hostname from a QR code label - potentially hosted on a different server
     get:
       tags:
         - hostname
