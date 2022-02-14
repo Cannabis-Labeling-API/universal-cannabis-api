@@ -8,7 +8,7 @@ info:
     url: matt.carter@nabis.com
 tags:
   - name: endpoint
-    description: Get the endpoint for the universal API from a QR code URL
+    description: This is a hosted file in the .well-known directory on your QR code hostname
   - name: product
     description: Information about product details like product name, description, doses, etc
   - name: batch
@@ -27,26 +27,50 @@ servers:
     description: Server for your universal API
 
 paths:
-  /uapi/endpoint:
+  https://qr-code.com/.well-known/cannabis-api.json:
     get:
-      description:
-        "URL to get the hostname from a QR code label - potentially hosted on a different server.
+      description: "
+        ## What is this:
+
+
+        URL to get the hostname from a QR code label - potentially hosted on a different server.
         This endpoint should also provide the vendor for the label,
         in order to assist in developers matching their API tokens to the correct endpoints.
 
-        For example, if you were to make a request to qr.nabis.com/uapi/endpoint, we would respond with an endpoint of qrApi.nabis.com/uapi/v1/
-        as well as a vendor tag of nabis, allowing a developer to easily match their stored API keys to our endpoint."
+
+        ## Usage:
+
+
+        If you were to make a request to qr.nabis.com/uapi/endpoint, we would respond with:
+
+
+        ```
+        {
+        endpoint: api.nabis.com/uapi/v1/
+        vendor: 'nabis'
+        }
+        ```
+
+
+        The 'vendor' tag allows a developer to easily match their stored API keys to the endpoint.
+
+
+        ## Additional Endpoints:
+
+        If you would like additional endpoints to be stored in the cannabis-api.json file, you can specify them with fieldname-endpoint. For example 'distributor-endpoint' or 'pos-endpoint'. You should *always* have an endpoint entry, however."
       tags:
         - endpoint
       servers:
         - url: https://shortqrurl.com/
       responses:
         200:
-          description: The base url for the API
           content:
             application/json:
               schema:
                 type: object
+                required:
+                  - endpoint
+                  - vendor
                 properties:
                   endpoint:
                     type: string
@@ -55,6 +79,9 @@ paths:
                     type: string
                     enum: ["nabis", "lucid", "chroma"]
                     example: nabis
+                  "*-endpoint":
+                    type: string
+                    example: qr-poc.example.com/uapi/v1/
   /batch/{id}:
     get:
       tags:
@@ -187,11 +214,11 @@ paths:
 
 components:
   securitySchemes:
-    ApiKeyAuth:
-      type: apiKey
-      in: "header"
-      name: "api-token"
-      description: Any users may generate an api token from their account page on the respective labeling site
+    Bearer Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Any users may generate a bearer API token from their account page on the respective labeling site.
   schemas:
     $ref: schemas/_index.yaml
   parameters:
