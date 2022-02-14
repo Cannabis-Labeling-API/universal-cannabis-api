@@ -8,7 +8,22 @@ info:
     url: matt.carter@nabis.com
 tags:
   - name: endpoint
-    description: This is a hosted file in the .well-known directory on your QR code hostname
+    description: |
+      ## What is this:
+      URL to get the hostname from a QR code label - potentially hosted on a different server.
+      This endpoint should also provide the vendor for the label,
+      in order to assist in developers matching their API tokens to the correct endpoints.
+      ## Usage:
+      If you were to make a request to qr.nabis.com/uapi/endpoint, we would respond with:
+      ```
+      {
+      endpoint: api.nabis.com/uapi/v1/
+      vendor: 'nabis'
+      }
+      ```
+      The 'vendor' tag allows a developer to easily match their stored API keys to the endpoint.
+      ## Additional Endpoints:
+      If you would like additional endpoints to be stored in the cannabis-api.json file, you can specify them with fieldname-endpoint. For example 'distributor-endpoint' or 'pos-endpoint'. You should *always* have an endpoint entry, however.
   - name: product
     description: Information about product details like product name, description, doses, etc
   - name: batch
@@ -20,50 +35,22 @@ tags:
   - name: regulator
     description: Query for details about regulator tags
 security:
-  - ApiKeyAuth:
+  - Bearer Token:
       - write
 servers:
   - url: https://qr.example.com/v1/uapi
     description: Server for your universal API
 
 paths:
-  https://qr-code.com/.well-known/cannabis-api.json:
+  /.well-known/cannabis-api.json:
     get:
-      description: "
-        ## What is this:
-
-
-        URL to get the hostname from a QR code label - potentially hosted on a different server.
-        This endpoint should also provide the vendor for the label,
-        in order to assist in developers matching their API tokens to the correct endpoints.
-
-
-        ## Usage:
-
-
-        If you were to make a request to qr.nabis.com/uapi/endpoint, we would respond with:
-
-
-        ```
-        {
-        endpoint: api.nabis.com/uapi/v1/
-        vendor: 'nabis'
-        }
-        ```
-
-
-        The 'vendor' tag allows a developer to easily match their stored API keys to the endpoint.
-
-
-        ## Additional Endpoints:
-
-        If you would like additional endpoints to be stored in the cannabis-api.json file, you can specify them with fieldname-endpoint. For example 'distributor-endpoint' or 'pos-endpoint'. You should *always* have an endpoint entry, however."
       tags:
         - endpoint
       servers:
         - url: https://shortqrurl.com/
       responses:
         200:
+          description: Successfully retrieved file
           content:
             application/json:
               schema:
