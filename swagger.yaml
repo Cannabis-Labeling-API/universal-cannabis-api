@@ -79,7 +79,9 @@ paths:
                     type: string
                     enum: ["nabis", "lucid", "chroma"]
                     example: nabis
-
+                  "*-endpoint":
+                    type: string
+                    example: qr-poc.example.com/uapi/v1/
   /batch/{id}:
     get:
       tags:
@@ -216,7 +218,7 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: Any users may generate a bearer API token from their account page on the respective labeling site
+      description: Any users may generate a bearer API token from their account page on the respective labeling site.
   schemas:
     $ref: schemas/_index.yaml
   parameters:
