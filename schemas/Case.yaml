@@ -3,13 +3,24 @@ required:
   - id
   - eaches
   - regulatorEvents
+  - batchId
+  - productId
+
 properties:
   id:
     $ref: Id.yaml
   eaches:
     $ref: IdArray.yaml
+  batchId:
+    $ref: Id.yaml
+  productId:
+    $ref: Id.yaml
   regulatorEvents:
     description: Sorted list (oldest first) of regulator events
     type: array
     items:
       $ref: Regulator.yaml
+  batch:
+    $ref: "./Batch.yaml"
+  product:
+    $ref: "./Product.yaml"

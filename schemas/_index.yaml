@@ -12,3 +12,5 @@ Regulator:
   $ref: Regulator.yaml
 Product:
   $ref: Product.yaml
+Manifest:
+  $ref: Manifest.yaml

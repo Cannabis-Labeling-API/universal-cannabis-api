@@ -1,0 +1,9 @@
+required:
+  - manifestItems
+properties:
+  manifestItems:
+    type: array
+    items:
+      $ref: ./ManifestItem.yaml
+
+type: object

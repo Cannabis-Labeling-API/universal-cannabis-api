@@ -1,0 +1,11 @@
+required:
+  - regulatorEventId
+  - qrCodeUrls
+properties:
+  regulatorEventId:
+    $ref: "./Id.yaml"
+  qrCodeUrls:
+    type: array
+    items:
+      type: string
+      example: qr.nabis.com/1234556

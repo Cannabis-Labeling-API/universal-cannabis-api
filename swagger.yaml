@@ -17,8 +17,9 @@ tags:
       If you were to make a request to qr.nabis.com/uapi/endpoint, we would respond with:
       ```
       {
-      endpoint: api.nabis.com/uapi/v1/
-      vendor: 'nabis'
+      "endpoint": "api.nabis.com/uapi/v1/",
+      "vendor": "nabis",
+      "routes": ["manifest"] // Can be ["product", "batch", "case", "each", "regulator", "manifest"]
       }
       ```
       The 'vendor' tag allows a developer to easily match their stored API keys to the endpoint.
@@ -29,11 +30,18 @@ tags:
   - name: batch
     description: Information about batch details like testing and THC content
   - name: case
-    description: Information and updating a case an item is a part of
+    description: |
+      Case matching input id - a case comes from a manufacturer and is a collection of items that are all the same. 
+      It cannot contain different item types.
   - name: each
-    description: Information and updating a serialized package - single unit of a skuId
+    description: Information and updating a serialized package - single unit of a product / batch
   - name: regulator
     description: Query for details about regulator tags
+  - name: manifest
+    description: |
+      Get details from an order (probably from a distributor), describing child package to QR code url mappings
+
+      The QR code field can contain an array of QR codes that represent all scanned items, allowing a lookup on a per-vendor basis by the child ID tags in the order
 security:
   - Bearer Token:
       - write
@@ -116,6 +124,7 @@ paths:
         - case
       parameters:
         - $ref: "#/components/parameters/pathId"
+        - $ref: "#/components/parameters/excludeFields"
       responses:
         200:
           description: Case matching input Id
@@ -132,7 +141,7 @@ paths:
         $ref: "#/components/requestBodies/regulatorBody"
       responses:
         200:
-          description: Case matching input id
+          description: Success
           content:
             application/json:
               schema:
@@ -142,12 +151,8 @@ paths:
       tags:
         - each
       parameters:
-        - in: path
-          name: id
-          description: id of Each to look up
-          required: true
-          schema:
-            type: string
+        - $ref: "#/components/parameters/pathId"
+        - $ref: "#/components/parameters/excludeFields"
       responses:
         200:
           description: Each matching input id
@@ -201,6 +206,19 @@ paths:
                 properties:
                   failures:
                     $ref: ./schemas/IdArray.yaml
+  /manifest/{id}/:
+    get:
+      tags:
+        - manifest
+      parameters:
+        - $ref: "#/components/parameters/pathId"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: ./schemas/Manifest.yaml
 
 components:
   securitySchemes:
@@ -208,17 +226,31 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: Any users may generate a bearer API token from their account page on the respective labeling site.
+      description: |
+        Any users may generate a bearer API token from their account page on a respective labeling site.
+
+        Tokens are only needed for write operations - all read operations can happen without authentication.
   schemas:
     $ref: schemas/_index.yaml
   parameters:
     pathId:
       in: path
       name: id
-      description: id of Each to look up
+      description: id to look up
       required: true
       schema:
         type: string
+    excludeFields:
+      in: query
+      name: excludedFields
+      description: comma separated list of fields to exclude in the request body
+      required: false
+      schema:
+        type: array
+        example: "product,batch"
+        items:
+          type: string
+
   requestBodies:
     regulatorBody:
       description: Body for a put / post with regulator information
