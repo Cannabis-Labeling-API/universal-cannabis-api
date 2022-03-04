@@ -41,7 +41,13 @@ tags:
     description: |
       Get details from an order (probably from a distributor), describing child package to QR code url mappings
 
-      The QR code field can contain an array of QR codes that represent all scanned items, allowing a lookup on a per-vendor basis by the child ID tags in the order
+      The manifestItems field contains an array of QR codes that represent all scanned items,
+      allowing a lookup on a per-vendor basis of the data about those items.
+
+      The regulatorEvent entry represents the transfer ID (if applicable). 
+
+      Using the manifest endpoint, a retailer can scan a single barcode on a box and then use subsequent 
+      API calls using the standard to get information about the associated regulator tags and product information.
 security:
   - Bearer Token:
       - write
@@ -219,6 +225,13 @@ paths:
             application/json:
               schema:
                 $ref: ./schemas/Manifest.yaml
+              example:
+                regulatorEvent:
+                  id: "0003166342"
+                  kind: manifest
+                manifestItems:
+                  - "qr.example.com/i/1234"
+                  - "qr-test.example.com/i/abcd"
 
 components:
   securitySchemes:

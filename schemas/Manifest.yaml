@@ -1,9 +1,15 @@
 required:
   - manifestItems
 properties:
+  regulatorEvent:
+    $ref: ./Regulator.yaml
+
   manifestItems:
     type: array
+    example:
+      - "qr.example.com"
+      - "qr.test.com"
     items:
-      $ref: ./ManifestItem.yaml
+      type: string
 
 type: object

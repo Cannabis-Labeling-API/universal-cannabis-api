@@ -1,6 +1,5 @@
 required:
   - id
-
   - kind
 properties:
   id:
@@ -10,5 +9,5 @@ properties:
     $ref: Id.yaml
   kind:
     type: string
-    enum: ["batch", "transfer"]
+    enum: ["batch", "transfer", "manifest"]
 type: object
