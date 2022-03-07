@@ -14,14 +14,9 @@ tags:
       This endpoint should also provide the vendor for the label,
       in order to assist in developers matching their API tokens to the correct endpoints.
       ## Usage:
-      If you were to make a request to qr.nabis.com/uapi/endpoint, we would respond with:
-      ```
-      {
-      "endpoint": "api.nabis.com/uapi/v1/",
-      "vendor": "nabis",
-      "routes": ["manifest"] // Can be ["product", "batch", "case", "each", "regulator", "manifest"]
-      }
-      ```
+      View a JSON schema of this inside the /wellknown/cannabis-api.schema.json
+
+
       The 'vendor' tag allows a developer to easily match their stored API keys to the endpoint.
       ## Additional Endpoints:
       If you would like additional endpoints to be stored in the cannabis-api.json file, you can specify them with fieldname-endpoint. For example 'distributor-endpoint' or 'pos-endpoint'. You should *always* have an endpoint entry, however.
@@ -41,7 +36,16 @@ tags:
     description: |
       Get details from an order (probably from a distributor), describing child package to QR code url mappings
 
-      The QR code field can contain an array of QR codes that represent all scanned items, allowing a lookup on a per-vendor basis by the child ID tags in the order
+      The contents field contains an array of QR codes that represent all scanned cases or items,
+      allowing a lookup on a per-vendor basis of the data about those cases or items.
+
+      In order to use the cases in your system, just perform a lookup on the case information endpoint and get the each IDs -
+      then use those to identify the scanned out QR codes.
+
+      The regulatorEvent entry represents the transfer ID (if applicable). 
+
+      Using the manifest endpoint, a retailer can scan a single barcode on a box and then use subsequent 
+      API calls using the standard (to multiple vendors) to get information about the associated regulator tags and product information.
 security:
   - Bearer Token:
       - write
@@ -219,6 +223,13 @@ paths:
             application/json:
               schema:
                 $ref: ./schemas/Manifest.yaml
+              example:
+                regulatorEvent:
+                  id: "0003166342"
+                  kind: manifest
+                contents:
+                  - "qr.example.com/i/1234"
+                  - "qr-test.example.com/i/abcd"
 
 components:
   securitySchemes:
