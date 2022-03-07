@@ -14,14 +14,9 @@ tags:
       This endpoint should also provide the vendor for the label,
       in order to assist in developers matching their API tokens to the correct endpoints.
       ## Usage:
-      If you were to make a request to qr.nabis.com/uapi/endpoint, we would respond with:
-      ```
-      {
-      "endpoint": "api.nabis.com/uapi/v1/",
-      "vendor": "nabis",
-      "routes": ["manifest"] // Can be ["product", "batch", "case", "each", "regulator", "manifest"]
-      }
-      ```
+      View a JSON schema of this inside the /wellknown/cannabis-api.schema.json
+
+
       The 'vendor' tag allows a developer to easily match their stored API keys to the endpoint.
       ## Additional Endpoints:
       If you would like additional endpoints to be stored in the cannabis-api.json file, you can specify them with fieldname-endpoint. For example 'distributor-endpoint' or 'pos-endpoint'. You should *always* have an endpoint entry, however.
