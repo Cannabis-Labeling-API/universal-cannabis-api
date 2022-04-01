@@ -79,7 +79,7 @@ paths:
                     example: qr.example.com/i/:id
                   vendor:
                     type: string
-                    enum: ["nabis", "lucid", "chroma"]
+                    enum: ["nabis", "lucidgreen", "chroma"]
                     example: nabis
                   "*-endpoint":
                     type: string
@@ -163,7 +163,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./schemas/Each.yaml
+                $ref: ./schemas/Item.yaml
     put:
       tags:
         - each
@@ -177,7 +177,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./schemas/Each.yaml
+                $ref: ./schemas/Item.yaml
   /regulator/{id}/:
     get:
       tags:

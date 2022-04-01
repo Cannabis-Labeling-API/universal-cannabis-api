@@ -3,7 +3,7 @@ Batch:
 Case:
   $ref: Case.yaml
 Each:
-  $ref: Each.yaml
+  $ref: Item.yaml
 Id:
   $ref: Id.yaml
 IdArray:

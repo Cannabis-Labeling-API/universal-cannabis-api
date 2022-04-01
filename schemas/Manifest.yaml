@@ -7,8 +7,9 @@ properties:
   manifestItems:
     type: array
     example:
-      - "qr.example.com"
-      - "qr.test.com"
+      - "https://qr.example.com/i/123465678"
+      - "https://qr.test.com/i/abneiofeiofioeqyw"
+    description: "A list of item IDs with full URL syntax."
     items:
       type: string
 

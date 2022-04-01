@@ -1,10 +1,33 @@
 type: object
 required:
-  - skuId
-  - defaultLabTestingState
-  - approvalStatus
-  - approvalStatusDateTime
+  - id
+  - brand_id
+  - coa_ids
+  - updated_on
 properties:
+  id:
+    $ref: Id.yaml
+  brand_id:
+    $ref: Id.yaml
+  name:
+    type: string
+  regulatory_uid:
+    type: string
+    format: Metrc ID
+  produced_on:
+    type: string
+    format: date
+  coa_ids:
+    type: array
+    items:
+      type: Id.yaml
+  updated_on:
+    type: string
+    format: date-time
+
+
+  # Below are the previouly specified fields from Metrc. They are left here for reference.
+  
   defaultLabTestingState:
     type: string
     enum: ["NotSubmitted"]

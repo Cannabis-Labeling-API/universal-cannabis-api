@@ -1,0 +1,22 @@
+type: object
+required:
+  - name
+  - url
+properties:
+  name:
+    type: string
+    description: File name of image.
+  url:
+    type: string
+    description: Absolute url of image that can either be downloaded or referenced in an HTML rendering context.
+  mime_type:
+    type: string
+    description: Mime type of image.
+  size_bytes:
+    type: integer
+    format: int32
+    description: Size of file in bytes
+  updated_on:
+    type: string
+    format: date-time
+    description: Date-time of when image was last updated.

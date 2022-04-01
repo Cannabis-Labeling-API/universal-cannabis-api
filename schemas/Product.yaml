@@ -1,20 +1,154 @@
-required:
+# copyright 2021 Lucid Green, Inc.
+
+required: 
   - id
   - name
-  - strainId
-  - strainName
-  - productCategoryName
-  - productCategoryType
-  - quantityType
-  - publicIngredients
-  - description
-  - isUsed
+  - updated_on
+  - product_type
+  - usage
+  - variety
+  - package_size
 properties:
   id:
     $ref: Id.yaml
+  brand_id:
+    $ref: Id.yaml
+  updated_on:
+    type: string
+    format: date-time
+    description: The date and time when the details of this product were last updated.
   name:
     type: string
     example: Kush OG
+  sku:
+    type: string
+  upc:
+    type: string
+  barcode:
+    type: string
+  product_line:
+    type: string
+  product_type:
+    type: string
+    enum:
+     - "blunt"
+     - "breath_strips"
+     - "brownie"
+     - "capsule"
+     - "cookie"
+     - "cooking_oil"
+     - "cracker"
+     - "decarb_oil"
+     - "dissolvable"
+     - "flower"
+     - "gummy"
+     - "hard_candy"
+     - "hash"
+     - "honey"
+     - "infused_beverage"
+     - "inhaler"
+     - "joint"
+     - "kief"
+     - "rso_oil"
+     - "shatter"
+     - "spread"
+     - "sublingual"
+     - "tincture"
+     - "transdermal_patch"
+     - "vape"
+     - "disposable_vape"
+     - "chocolate"
+     - "body_oil"
+     - "balm"
+     - "salve"
+     - "topical_cream"
+     - "roller_ball_gel_pen"
+     - "tea"
+     - "bath_salts"
+     - "cbd_cigarettes"
+     - "pre_rolls"
+     - "wax"
+     - "e_liquid"
+     - "lube"
+     - "suppository"
+     - "granola"
+     - "tablet"
+     - "sublingual_tablet"
+     - "sublingual_spray"
+     - "pre_ground"
+  usage:
+    type: string
+    enum:
+     - "recreational"
+     - "medical"
+  variety:
+    type: string
+    enum:
+     - "indica"
+     - "sativa"
+     - "hybrid"
+     - "indica_dominant_hybrid"
+     - "sativa_dominant_hybrid"
+     - "cbd"
+     - "cbn"
+  strain:
+    type: string
+  total_cannabinoids:
+    $ref: Size.yaml
+    description: The expected amount of total cannabinoids within the package. Note this is the marketed amount, not the tested amount.
+  total_thc:
+    $ref: Size.yaml
+    description: The expected amount of total thc within the package. Note this is the marketed amount, not the tested amount.
+  total_cbd:
+    $ref: Size.yaml
+    description: The expected amount of total cbd within the package. Note this is the marketed amount, not the tested amount.
+  thc_cbd_ratio:
+    type: string
+    description: "The ratio of THC:CBD"
+    example: "5:1"
+  servings:
+    type: number
+    format: float
+  serving_size:
+    $ref: Size.yaml
+  package_size:
+    $ref: Size.yaml
+  description:
+    type: string
+    format: html
+  tests_description:
+    type: string
+    format: html
+  testing_methodology:
+    type: string
+    format: html
+  usage_recommendation:
+    type: string
+    format: html
+  about_ingredients:
+    type: string
+    format: html
+  ingredients:
+    type: array
+    items:
+      type: string
+  special_diet:
+    type: string
+    enum:
+     - "vegan"
+     - "gluten_free"
+     - "organic"
+     - "sugar_free"
+  images:
+    type: object
+    properties:
+      thumbnail:
+        $ref: Image.yaml
+      primary:
+        $ref: Image.yaml
+
+  # Below are the previouly specified fields from Metrc. They are left here for reference.
+  
   strainId:
     type: number
     description: Uses same name as Metrc StrainId
@@ -51,10 +185,10 @@ properties:
     type: string
     nullable: true
     description: Uses same name as Metrc PublicIngredients
-  description:
-    type: string
-    nullable: true
-    description: Uses same name as Metrc Description
+  # description:
+  #   type: string
+  #   nullable: true
+  #   description: Uses same name as Metrc Description
   unitOfMeasureName:
     type: string
     enum: ["Ounces", "Each"]
