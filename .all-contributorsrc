@@ -13,15 +13,6 @@
       "contributions": [
         "code"
       ]
-    }
-    {
-      "login": "danaspiegel",
-      "name": "Dana Spiegel",
-      "avatar_url": "https://avatars.githubusercontent.com/u/6631?v=4",
-      "profile": "http://foundertherapy.co",
-      "contributions": [
-        "code"
-      ]
     },
     {
       "login": "1e1f",
@@ -31,7 +22,24 @@
       "contributions": [
         "code"
       ]
-    }
+    },
+    {
+      "login": "danaspiegel",
+      "name": "Dana Spiegel",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6631?v=4",
+      "profile": "http://foundertherapy.co",
+      "contributions": [
+        "code"
+      ]
+    },
+    {      
+      "login": "TechnotronicOz",
+      "name": "Matt Carter",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1142035?v=4",
+      "profile": "https://github.com/TechnotronicOz",
+      "contributions": [
+        "code"
+      ]
   ],
   "contributorsPerLine": 7,
   "projectName": "universal-cannabis-api",
