@@ -6,6 +6,15 @@
   "commit": false,
   "contributors": [
     {
+      "login": "elibosley",
+      "name": "Eli Bosley",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11823237?v=4",
+      "profile": "http://elijahbosley.com",
+      "contributions": [
+        "code"
+      ]
+    }
+    {
       "login": "danaspiegel",
       "name": "Dana Spiegel",
       "avatar_url": "https://avatars.githubusercontent.com/u/6631?v=4",
