@@ -14,6 +14,24 @@
         "code"
       ]
     }
+    {
+      "login": "danaspiegel",
+      "name": "Dana Spiegel",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6631?v=4",
+      "profile": "http://foundertherapy.co",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "1e1f",
+      "name": "Leif Shackelford",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4080925?v=4",
+      "profile": "http://chroma.fund", 
+      "contributions": [
+        "code"
+      ]
+    }
   ],
   "contributorsPerLine": 7,
   "projectName": "universal-cannabis-api",

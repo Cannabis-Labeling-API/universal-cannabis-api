@@ -20,6 +20,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="http://elijahbosley.com"><img src="https://avatars.githubusercontent.com/u/11823237?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Eli Bosley</b></sub></a><br /><a href="https://github.com/Cannabis-Labeling-API/universal-cannabis-api/commits?author=elibosley" title="Code">💻</a></td>
+    <td align="center"><a href="http://chroma.fund"><img src="https://avatars.githubusercontent.com/u/4080925?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Leif Shackelford</b></sub></a><br /><a href="https://github.com/Cannabis-Labeling-API/universal-cannabis-api/commits?author=1e1f" title="Code">💻</a></td>
+    <td align="center"><a href="http://foundertherapy.co"><img src="https://avatars.githubusercontent.com/u/6631?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Dana Spiegel</b></sub></a><br /><a href="https://github.com/Cannabis-Labeling-API/universal-cannabis-api/commits?author=danaspiegel" title="Code">💻</a></td>
   </tr>
 </table>
 
