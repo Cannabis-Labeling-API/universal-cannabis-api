@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "elibosley",
+      "name": "Eli Bosley",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11823237?v=4",
+      "profile": "http://elijahbosley.com",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "universal-cannabis-api",
+  "projectOwner": "Cannabis-Labeling-API",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
