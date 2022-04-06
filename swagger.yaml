@@ -15,9 +15,8 @@ tags:
       in order to assist in developers matching their API tokens to the correct endpoints.
       ## Usage:
       View a JSON schema of this inside the /wellknown/cannabis-api.schema.json
+      You can validate your .well-known/cannabis-api.json file against this on this website: https://www.jsonschemavalidator.net/
 
-
-      The 'vendor' tag allows a developer to easily match their stored API keys to the endpoint.
       ## Additional Endpoints:
       If you would like additional endpoints to be stored in the cannabis-api.json file, you can specify them with fieldname-endpoint. For example 'distributor-endpoint' or 'pos-endpoint'. You should *always* have an endpoint entry, however.
   - name: product
