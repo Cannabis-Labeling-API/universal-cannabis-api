@@ -6,6 +6,33 @@
   "commit": false,
   "contributors": [
     {
+      "login": "elibosley",
+      "name": "Eli Bosley",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11823237?v=4",
+      "profile": "http://elijahbosley.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "1e1f",
+      "name": "Leif Shackelford",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4080925?v=4",
+      "profile": "http://chroma.fund", 
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "danaspiegel",
+      "name": "Dana Spiegel",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6631?v=4",
+      "profile": "http://foundertherapy.co",
+      "contributions": [
+        "code"
+      ]
+    },
+    {      
       "login": "TechnotronicOz",
       "name": "Matt Carter",
       "avatar_url": "https://avatars.githubusercontent.com/u/1142035?v=4",
@@ -13,7 +40,6 @@
       "contributions": [
         "code"
       ]
-    }
   ],
   "contributorsPerLine": 7,
   "projectName": "universal-cannabis-api",
