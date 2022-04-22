@@ -9,7 +9,7 @@ required:
 properties:
   id:
     $ref: Id.yaml
-  items:
+  eaches:
     $ref: IdArray.yaml
   regulatorEvents:
     description: Sorted list (oldest first) of regulator events

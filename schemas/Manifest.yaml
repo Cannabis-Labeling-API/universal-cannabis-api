@@ -1,10 +1,10 @@
 required:
-  - manifestItems
+  - eaches
 properties:
   regulatorEvent:
     $ref: ./Regulator.yaml
 
-  manifestItems:
+  eaches:
     type: array
     example:
       - "https://qr.example.com/i/123465678"

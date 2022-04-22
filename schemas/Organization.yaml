@@ -7,6 +7,6 @@ properties:
     $ref: Id.yaml
   name:
     type: string
-    description: Name of the Brand
+    description: Name of the Organization
   thumbnail:
     $ref: "#/schemas/Image"

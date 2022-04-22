@@ -1,90 +1,27 @@
 type: object
 required:
   - id
-  - brand_id
-  - coa_ids
-  - updated_on
+  - organizationId
+  - coaIds
 properties:
   id:
     $ref: Id.yaml
-  brand_id:
+  organizationId:
     $ref: Id.yaml
   name:
     type: string
-  regulatory_uid:
-    type: string
-    format: Metrc ID
-  produced_on:
+  regulatoryUids:
+    description: Sorted list (oldest first) of regulator events
+    type: array
+    items:
+      $ref: Regulator.yaml
+  producedOn:
     type: string
     format: date
-  coa_ids:
+  coaIds:
     type: array
     items:
       type: Id.yaml
-  updated_on:
+  updatedOn:
     type: string
     format: date-time
-
-
-  # Below are the previouly specified fields from Metrc. They are left here for reference.
-  
-  defaultLabTestingState:
-    type: string
-    enum: ["NotSubmitted"]
-    description: Uses same name as Metrc DefaultLabTestingState
-  approvalStatus:
-    type: string
-    enum: ["Approved"]
-    description: Uses same name as Metrc ApprovalStatus
-  approvalStatusDateTime:
-    type: string
-    format: date-time
-    description: Uses same name as Metrc ApprovalStatusDateTime
-  unitCbdPercent:
-    type: number
-    format: float
-    nullable: true
-    description: Uses same name as Metrc UnitCbdPercentage
-  unitCbdContent:
-    type: number
-    format: float
-    nullable: true
-    description: Uses same name as Metrc UnitCbdContent
-  unitCbdContentUnitOfMeasureName:
-    type: string
-    nullable: true
-    enum: ["Each"]
-    description: Uses same name as Metrc UnitCbdContentUnitOfMeasureName
-  unitCbdContentDose:
-    type: string
-    nullable: true
-    description: Uses same name as Metrc UnitCbdContentDose
-  unitCbdContentDoseUnitOfMeasureName:
-    type: string
-    nullable: true
-    enum: ["Each"]
-    description: Uses same name as Metrc UnitCbdContentDoseUnitOfMeasureName
-  unitThcPercent:
-    type: number
-    format: float
-    nullable: true
-    description: Uses same name as Metrc UnitThcPercent
-  unitThcContent:
-    type: number
-    format: float
-    nullable: true
-    description: Uses same name as Metrc UnitThcContent
-  unitThcContentUnitOfMeasureName:
-    type: string
-    nullable: true
-    enum: ["Each"]
-    description: Uses same name as Metrc UnitThcContentUnitOfMeasureName
-  unitThcContentDose:
-    type: string
-    nullable: true
-    description: Uses same name as Metrc UnitThcContentDose
-  unitThcContentDoseUnitOfMeasureName:
-    type: string
-    nullable: true
-    enum: ["Each"]
-    description: Uses same name as Metrc UnitThcContentDoseUnitOfMeasureName

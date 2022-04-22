@@ -9,14 +9,14 @@ properties:
   url:
     type: string
     description: Absolute url of image that can either be downloaded or referenced in an HTML rendering context.
-  mime_type:
+  mimeType:
     type: string
     description: Mime type of image.
-  size_bytes:
+  sizeBytes:
     type: integer
     format: int32
     description: Size of file in bytes
-  updated_on:
+  updatedOn:
     type: string
     format: date-time
     description: Date-time of when image was last updated.
