@@ -10,7 +10,7 @@ properties:
     $ref: Id.yaml
   name:
     type: string
-  regulatoryUids:
+  regulatoryEvents:
     description: Sorted list (oldest first) of regulator events
     type: array
     items:

@@ -1,5 +1,4 @@
-# copyright 2021 Lucid Green, Inc.
-
+type: object
 required: 
   - id
   - name
@@ -58,8 +57,8 @@ properties:
      - "lube"
      - "preGround"
      - "preRolls"
-     - "rollerBallGelPen"
-     - "rso_oil"
+     - "rollerballGelPen"
+     - "rsoOil"
      - "salve"
      - "shatter"
      - "spread"
