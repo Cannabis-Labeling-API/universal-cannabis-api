@@ -1,15 +1,14 @@
 required:
-  - eaches
+  - manifestItems
 properties:
   regulatorEvent:
     $ref: ./Regulator.yaml
 
-  eaches:
+  manifestItems:
     type: array
     example:
-      - "https://qr.example.com/i/123465678"
-      - "https://qr.test.com/i/abneiofeiofioeqyw"
-    description: "A list of item IDs with full URL syntax."
+      - "qr.example.com"
+      - "qr.test.com"
     items:
       type: string
 

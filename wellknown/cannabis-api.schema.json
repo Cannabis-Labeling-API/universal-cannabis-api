@@ -1,44 +1,44 @@
 {
-    "$schema": "https://json-schema.org/draft-07/schema",
-    "title": "cannabisapi.json",
-    "required": ["endpoint", "vendor", "path-components"],
-    "properties": {
-        "endpoint": {
-            "description": "The endpoint to call your universal API",
-            "type": "string"
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "title": "cannabisapi.json",
+  "required": ["endpoint", "vendor", "path-components"],
+  "properties": {
+    "endpoint": {
+      "description": "The endpoint to call your universal API",
+      "type": "string"
+    },
+    "vendor": {
+      "type": "string",
+      "description": "The vendor of the API, a string to describe you"
+    },
+    "routes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["product", "batch", "case", "each", "regulator", "manifest"]
+      }
+    },
+    "path-components": {
+      "type": "object",
+      "properties": {
+        "item": {
+          "type": "string"
         },
-        "vendor": {
-            "type": "string",
-            "description": "The vendor of the API, a string to describe you"
-        },
-        "routes": {
-            "type": "array",
-            "items": {
-                "type": "string",
-                "enum": ["product", "batch", "case", "each", "regulator", "manifest"]
-            }
-        },
-        "path-components": {
-            "type": "object",
-            "properties": {
-                "item": {
-                    "type": "string"
-                },
-                "case": {
-                    "type": "string"
-                }
-            }
-        },
-        "example": {
-            "type": "object",
-            "properties": {
-                "item": {
-                    "type": "string"
-                },
-                "case": {
-                    "type": "string"
-                }
-            }
+        "case": {
+          "type": "string"
         }
+      }
+    },
+    "example": {
+      "type": "object",
+      "properties": {
+        "item": {
+          "type": "string"
+        },
+        "case": {
+          "type": "string"
+        }
+      }
     }
+  }
 }

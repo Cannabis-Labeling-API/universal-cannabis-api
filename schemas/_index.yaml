@@ -1,5 +1,3 @@
-Amount:
-  $reg: Amount.yaml
 Batch:
   $ref: Batch.yaml
 Case:
@@ -10,13 +8,9 @@ Id:
   $ref: Id.yaml
 IdArray:
   $ref: IdArray.yaml
-Image:
-  $ref: Image.yaml
-Manifest:
-  $ref: Manifest.yaml
-Organization:
-  $ref: Organization.yaml
-Product:
-  $ref: Product.yaml
 Regulator:
   $ref: Regulator.yaml
+Product:
+  $ref: Product.yaml
+Manifest:
+  $ref: Manifest.yaml
