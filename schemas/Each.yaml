@@ -16,8 +16,4 @@ properties:
     type: array
     items:
       $ref: Regulator.yaml
-  batch:
-    $ref: "./Batch.yaml"
-  product:
-    $ref: "./Product.yaml"
 type: object

@@ -1,2 +1,3 @@
 type: string
 format: uuid
+description: Unique ID for an object. Format of uuid is platform dependent. Client implementations should expect that uuid values are always unique within a given implementation, but should not assume any particular format for the uuid itself other than string. Note that depending on platform implementation, it may be possible to convert the string to a valid UUID, however the specifics of such a conversion must be determined from the platform implementation.

@@ -1,108 +1,145 @@
-required:
+type: object
+required: 
   - id
   - name
-  - strainId
-  - strainName
-  - productCategoryName
-  - productCategoryType
-  - quantityType
-  - publicIngredients
-  - description
-  - isUsed
+  - organizationId
+  - productType
+  - variety
 properties:
   id:
     $ref: Id.yaml
+  organizationId:
+    $ref: Id.yaml
+  updatedOn:
+    type: string
+    format: date-time
+    description: The date and time when the details of this product were last updated.
   name:
     type: string
     example: Kush OG
-  strainId:
-    type: number
-    description: Uses same name as Metrc StrainId
-  strainName:
+  sku:
     type: string
-    description: Uses same name as Metrc StrainName
-  productCategoryName:
+  upc:
+    type: string
+  barcode:
+    type: string
+  productLine:
+    type: string
+  productType:
     type: string
     enum:
-      [
-        "Pre-Roll Flower",
-        "Flower (packaged eight - each",
-        "Flower (packaged - each)",
-        "Vape Cartridge (weight - each)",
-        "Other Concentrate (weight - each)",
-        "Edible (volume - each)",
-        "Tincture (volume - each)",
-      ]
-    description: Uses same name as Metrc ProductCategoryName
-  productCategoryType:
+     - "balm"
+     - "bathSalts"
+     - "blunt"
+     - "bodyOil"
+     - "breathStrips"
+     - "brownie"
+     - "capsule"
+     - "cbdCigarettes"
+     - "chocolate"
+     - "cookie"
+     - "cookingOil"
+     - "cracker"
+     - "decarbOil"
+     - "disposableVape"
+     - "dissolvable"
+     - "eLiquid"
+     - "flower"
+     - "granola"
+     - "gummy"
+     - "hardCandy"
+     - "hash"
+     - "honey"
+     - "infusedBeverage"
+     - "inhaler"
+     - "joint"
+     - "kief"
+     - "lube"
+     - "preGround"
+     - "preRolls"
+     - "rollerballGelPen"
+     - "rsoOil"
+     - "salve"
+     - "shatter"
+     - "spread"
+     - "sublingual"
+     - "sublingualSpray"
+     - "sublingualTablet"
+     - "suppository"
+     - "tablet"
+     - "tea"
+     - "tincture"
+     - "topicalCream"
+     - "transdermalPatch"
+     - "vape"
+     - "wax"
+  usage:
     type: string
-    enum: ["Buds", "Concentrate", "InfusedEdible"]
-    description: Uses same name as Metrc ProductCategoryType
-  quantityType:
+    enum:
+     - "medical"
+     - "recreational"
+  variety:
     type: string
-    enum: ["WeightBased", "CountBased"]
-    description: Uses same name as Metrc QuantityType
-  administrationMethod:
+    enum:
+     - "cbd"
+     - "cbn"
+     - "hybrid"
+     - "indica"
+     - "indicaDominant"
+     - "sativa"
+     - "sativaDominant"
+  strain:
     type: string
-    nullable: true
-    enum: [""]
-    description: Uses same name as Metrc AdministrationMethod
-  publicIngredients:
+  totalCannabinoids:
+    $ref: Amount.yaml
+    description: The expected amount of total cannabinoids within the package. Note this is the marketed amount, not the tested amount.
+  totalThc:
+    $ref: Amount.yaml
+    description: The expected amount of total thc within the package. Note this is the marketed amount, not the tested amount.
+  totalCbd:
+    $ref: Amount.yaml
+    description: The expected amount of total cbd within the package. Note this is the marketed amount, not the tested amount.
+  thcCbdRatio:
     type: string
-    nullable: true
-    description: Uses same name as Metrc PublicIngredients
+    description: "The ratio of THC:CBD"
+    example: "5:1"
+  servings:
+    type: number
+    format: float
+  servingSize:
+    $ref: Amount.yaml
+  packageSize:
+    $ref: Amount.yaml
   description:
     type: string
-    nullable: true
-    description: Uses same name as Metrc Description
-  unitOfMeasureName:
+    format: html
+  testsDescription:
     type: string
-    enum: ["Ounces", "Each"]
-    description: Uses same name as Metrc UnitOfMeasureName
-  unitVolume:
-    type: number
-    format: float
-    nullable: true
-    description: Uses same name as Metrc UnitVolume
-  unitVolumeUnitOfMeasureName:
+    format: html
+  testingMethodology:
     type: string
-    nullable: true
-    enum: ["Each"]
-    description: Uses same name as Metrc UnitVolumeUnitOfMeasureName
-  unitWeight:
-    type: number
-    format: float
-    nullable: true
-    description: Uses same name as Metrc UnitWeight
-  unitWeightUnitOfMeasureName:
+    format: html
+  usageRecommendation:
     type: string
-    nullable: true
-    enum: ["Each"]
-    description: Uses same name as Metrc UnitWeightUnitOfMeasureName
-  servingSize:
+    format: html
+  aboutIngredients:
     type: string
-    nullable: true
-    description: Uses same name as Metrc ServingSize
-  supplyDurationDays:
-    type: number
-    format: integer
-    nullable: true
-    description: Uses same name as Metrc SupplyDurationDays
-  nubmerOfDoses:
-    type: number
-    format: float
-    nullable: true
-    description: Uses same name as Metrc NumberOfDoses
-  unitQuantity:
-    type: integer
-    nullable: true
-    description: Uses same name as Metrc UnitQuantity
-  unitQuantityUnitOfMeasure:
+    format: html
+  ingredients:
+    type: array
+    items:
+      type: string
+  specialDiet:
     type: string
-    nullable: true
-    enum: ["Each"]
-    description: Uses same name as Metrc UnitQuantityUnitOfMeasureName
-  isUsed:
-    type: boolean
-    description: Uses same name as Metrc IsUsed
-type: object
+    enum:
+     - "glutenFree"
+     - "organic"
+     - "sugarFree"
+     - "vegan"
+  images:
+    type: object
+    properties:
+      thumbnail:
+        $ref: Image.yaml
+      primary:
+        $ref: Image.yaml

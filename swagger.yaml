@@ -25,7 +25,7 @@ tags:
     description: Information about batch details like testing and THC content
   - name: case
     description: |
-      Case matching input id - a case comes from a manufacturer and is a collection of items that are all the same. 
+      Case matching input id - a case comes from a manufacturer and is a collection of eaches that are all the same. 
       It cannot contain different item types.
   - name: each
     description: Information and updating a serialized package - single unit of a product / batch
@@ -35,8 +35,8 @@ tags:
     description: |
       Get details from an order (probably from a distributor), describing child package to QR code url mappings
 
-      The contents field contains an array of QR codes that represent all scanned cases or items,
-      allowing a lookup on a per-vendor basis of the data about those cases or items.
+      The contents field contains an array of QR codes that represent all scanned cases or eaches,
+      allowing a lookup on a per-vendor basis of the data about those cases or eaches.
 
       In order to use the cases in your system, just perform a lookup on the case information endpoint and get the each IDs -
       then use those to identify the scanned out QR codes.
@@ -78,7 +78,7 @@ paths:
                     example: qr.example.com/i/:id
                   vendor:
                     type: string
-                    enum: ["nabis", "lucid", "chroma"]
+                    enum: ["nabis", "lucidgreen", "chroma"]
                     example: nabis
                   "*-endpoint":
                     type: string
@@ -195,7 +195,7 @@ paths:
         $ref: "#/components/requestBodies/regulatorMultiputBody"
       responses:
         200:
-          description: Returns the regulator event that was attached to these items, fails if the items are not all from the same parent
+          description: Returns the regulator event that was attached to these eaches, fails if the eaches are not all from the same parent
           content:
             application/json:
               schema:
@@ -270,7 +270,7 @@ components:
             oneOf:
               - $ref: ./schemas/Regulator.yaml
     regulatorMultiputBody:
-      description: Body for a request to put a regulator id on multiple items
+      description: Body for a request to put a regulator id on multiple eaches
       content:
         application/json:
           schema:
