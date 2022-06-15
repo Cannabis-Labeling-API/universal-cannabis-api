@@ -41,8 +41,9 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "Github Action"
           git commit -m 'deploy'
+
       - name: Run publish
-        uses: ad-m/github-push-action@v0.5.0
+        uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
