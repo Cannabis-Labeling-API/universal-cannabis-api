@@ -3,9 +3,6 @@ info:
   description: Sample API for Universal QR Codes
   version: 1.0.1
   title: Universal QR Code API
-  contact:
-    email: eli@nabis.com
-    url: matt.carter@nabis.com
 tags:
   - name: endpoint
     description: |
@@ -15,8 +12,7 @@ tags:
       in order to assist in developers matching their API tokens to the correct endpoints.
       ## Usage:
       View a JSON schema of this inside the /wellknown/cannabis-api.schema.json
-      You can validate your .well-known/cannabis-api.json file against this on this website: https://www.jsonschemavalidator.net/
-
+      The 'vendor' tag allows a developer to easily match their stored API keys to the endpoint.
       ## Additional Endpoints:
       If you would like additional endpoints to be stored in the cannabis-api.json file, you can specify them with fieldname-endpoint. For example 'distributor-endpoint' or 'pos-endpoint'. You should *always* have an endpoint entry, however.
   - name: product
@@ -34,15 +30,11 @@ tags:
   - name: manifest
     description: |
       Get details from an order (probably from a distributor), describing child package to QR code url mappings
-
       The contents field contains an array of QR codes that represent all scanned cases or items,
       allowing a lookup on a per-vendor basis of the data about those cases or items.
-
       In order to use the cases in your system, just perform a lookup on the case information endpoint and get the each IDs -
       then use those to identify the scanned out QR codes.
-
       The regulatorEvent entry represents the transfer ID (if applicable). 
-
       Using the manifest endpoint, a retailer can scan a single barcode on a box and then use subsequent 
       API calls using the standard (to multiple vendors) to get information about the associated regulator tags and product information.
 security:
@@ -78,7 +70,7 @@ paths:
                     example: qr.example.com/i/:id
                   vendor:
                     type: string
-                    enum: ["nabis", "lucid", "chroma"]
+                    enum: ["nabis", "lucidgreen", "chroma"]
                     example: nabis
                   "*-endpoint":
                     type: string
@@ -177,7 +169,7 @@ paths:
             application/json:
               schema:
                 $ref: ./schemas/Each.yaml
-  /regulator/{id}/:
+  /regulator/{id}:
     get:
       tags:
         - regulator
@@ -209,7 +201,7 @@ paths:
                 properties:
                   failures:
                     $ref: ./schemas/IdArray.yaml
-  /manifest/{id}/:
+  /manifest/{id}:
     get:
       tags:
         - manifest
@@ -238,7 +230,6 @@ components:
       bearerFormat: JWT
       description: |
         Any users may generate a bearer API token from their account page on a respective labeling site.
-
         Tokens are only needed for write operations - all read operations can happen without authentication.
   schemas:
     $ref: schemas/_index.yaml

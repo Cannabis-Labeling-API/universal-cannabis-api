@@ -1,0 +1,13 @@
+required:
+  - name
+  - value
+  - unit
+properties:
+   name:
+     type: string
+   value:
+     type: string
+   unit:
+     type: string
+     enum:
+      - "g"
